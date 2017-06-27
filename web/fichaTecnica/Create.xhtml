@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FichaTecnicaCreateDlg" widgetVar="FichaTecnicaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFichaTecnicaTitle}">
+            <h:form id="FichaTecnicaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{fichaTecnicaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFichaTecnicaLabel_fichaTecnicaId}" for="fichaTecnicaId" />
+                        <p:inputText id="fichaTecnicaId" value="#{fichaTecnicaController.selected.fichaTecnicaId}" title="#{bundle.CreateFichaTecnicaTitle_fichaTecnicaId}" required="true" requiredMessage="#{bundle.CreateFichaTecnicaRequiredMessage_fichaTecnicaId}"/>
+                        <p:outputLabel value="#{bundle.CreateFichaTecnicaLabel_desarrolloId}" for="desarrolloId" />
+                        <p:inputText id="desarrolloId" value="#{fichaTecnicaController.selected.desarrolloId}" title="#{bundle.CreateFichaTecnicaTitle_desarrolloId}" />
+                        <p:outputLabel value="#{bundle.CreateFichaTecnicaLabel_fileFichaproveedorName}" for="fileFichaproveedorName" />
+                        <p:inputText id="fileFichaproveedorName" value="#{fichaTecnicaController.selected.fileFichaproveedorName}" title="#{bundle.CreateFichaTecnicaTitle_fileFichaproveedorName}" />
+                        <p:outputLabel value="#{bundle.CreateFichaTecnicaLabel_fileFichaproveedor}" for="fileFichaproveedor" />
+                        <p:inputTextarea rows="4" cols="30" id="fileFichaproveedor" value="#{fichaTecnicaController.selected.fileFichaproveedor}" title="#{bundle.CreateFichaTecnicaTitle_fileFichaproveedor}" />
+                        <p:outputLabel value="#{bundle.CreateFichaTecnicaLabel_fileFichalibertadName}" for="fileFichalibertadName" />
+                        <p:inputText id="fileFichalibertadName" value="#{fichaTecnicaController.selected.fileFichalibertadName}" title="#{bundle.CreateFichaTecnicaTitle_fileFichalibertadName}" />
+                        <p:outputLabel value="#{bundle.CreateFichaTecnicaLabel_fileFichalibertad}" for="fileFichalibertad" />
+                        <p:inputTextarea rows="4" cols="30" id="fileFichalibertad" value="#{fichaTecnicaController.selected.fileFichalibertad}" title="#{bundle.CreateFichaTecnicaTitle_fileFichalibertad}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{fichaTecnicaController.create}" value="#{bundle.Save}" update="display,:FichaTecnicaListForm:datalist,:growl" oncomplete="handleSubmit(args,'FichaTecnicaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FichaTecnicaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

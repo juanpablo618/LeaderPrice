@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CertificadoEditDlg" widgetVar="CertificadoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCertificadoTitle}">
+            <h:form id="CertificadoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{certificadoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCertificadoLabel_certificadoId}" for="certificadoId" />
+                        <p:inputText id="certificadoId" value="#{certificadoController.selected.certificadoId}" title="#{bundle.EditCertificadoTitle_certificadoId}" required="true" requiredMessage="#{bundle.EditCertificadoRequiredMessage_certificadoId}"/>
+                        <p:outputLabel value="#{bundle.EditCertificadoLabel_datosLegalesId}" for="datosLegalesId" />
+                        <p:selectOneMenu id="datosLegalesId" value="#{certificadoController.selected.datosLegalesId}" required="true" requiredMessage="#{bundle.EditCertificadoRequiredMessage_datosLegalesId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{datosLegalesController.itemsAvailableSelectOne}"
+                                           var="datosLegalesIdItem"
+                                           itemValue="#{datosLegalesIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{certificadoController.update}" value="#{bundle.Save}" update="display,:CertificadoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CertificadoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CertificadoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

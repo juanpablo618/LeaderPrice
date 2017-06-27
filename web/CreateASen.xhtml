@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AnalisisSensorialCreateDlg" widgetVar="AnalisisSensorialCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAnalisisSensorialTitle}">
+            <h:form id="AnalisisSensorialCreateForm" enctype="multipart/form-data">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" >
+                        <p:outputLabel for="fecha" value="Fecha: "/>
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" showOn="button" value="#{uploadImage.fecha}"/>
+
+                        <p:outputLabel for="tipo" value="Tipo Análisis: "/>
+                        <p:selectOneMenu id="tipo" value="#{uploadImage.nombre}">
+                            <f:selectItem id="item1" itemLabel="Nuevo pruducto" itemValue="Nuevo pruducto" />
+                            <f:selectItem id="item2" itemLabel="Cambio de producto" itemValue="Cambio de producto" />
+                            <f:selectItem id="item3" itemLabel="Duplicación de producto" itemValue="Duplicación de producto" />
+                        </p:selectOneMenu>
+
+                        <h:outputLabel for="resultado" value="Resultado: *" />
+                        <p:inputText id="resultado" value="#{uploadImage.resultado}"/> 
+
+                        <h:outputLabel for="image" value="Adjunto: *" />
+                        <p:fileUpload value="#{uploadImage.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+
+                        <h:outputLabel for="DESARROLLO_ID" value="Desarrolo Nro:" />
+                        
+                        <h:selectOneMenu id="DESARROLLO_ID" value="#{uploadImage.DESARROLLO_ID}">
+                            
+                                <f:selectItem id="DESARROLLO_ID2" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+                                
+                        </h:selectOneMenu>
+
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Save}" ajax="false" action="#{uploadImage.upload}"/>
+                    
+
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

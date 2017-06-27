@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RneEditDlg" widgetVar="RneEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRneTitle}">
+            <h:form id="RneEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{rneController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRneLabel_rneId}" for="rneId" />
+                        <p:inputText id="rneId" value="#{rneController.selected.rneId}" title="#{bundle.EditRneTitle_rneId}" required="true" requiredMessage="#{bundle.EditRneRequiredMessage_rneId}"/>
+                        <p:outputLabel value="#{bundle.EditRneLabel_fileRneName}" for="fileRneName" />
+                        <p:inputText id="fileRneName" value="#{rneController.selected.fileRneName}" title="#{bundle.EditRneTitle_fileRneName}" />
+                        <p:outputLabel value="#{bundle.EditRneLabel_fileRne}" for="fileRne" />
+                        <p:inputTextarea rows="4" cols="30" id="fileRne" value="#{rneController.selected.fileRne}" title="#{bundle.EditRneTitle_fileRne}" />
+                        <p:outputLabel value="#{bundle.EditRneLabel_datosLegalesId}" for="datosLegalesId" />
+                        <p:selectOneMenu id="datosLegalesId" value="#{rneController.selected.datosLegalesId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{datosLegalesController.itemsAvailableSelectOne}"
+                                           var="datosLegalesIdItem"
+                                           itemValue="#{datosLegalesIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{rneController.update}" value="#{bundle.Save}" update="display,:RneListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RneEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RneEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

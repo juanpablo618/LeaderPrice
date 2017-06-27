@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PackagingViewDlg" widgetVar="PackagingViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPackagingTitle}">
+            <h:form id="PackagingViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{packagingController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPackagingLabel_packagingId}"/>
+                        <h:outputText value="#{packagingController.selected.packagingId}" title="#{bundle.ViewPackagingTitle_packagingId}"/>
+                        <h:outputText value="#{bundle.ViewPackagingLabel_mkt}"/>
+                        <p:selectBooleanCheckbox value="#{packagingController.selected.mkt}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewPackagingLabel_proveedor}"/>
+                        <p:selectBooleanCheckbox value="#{packagingController.selected.proveedor}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewPackagingLabel_calidad}"/>
+                        <p:selectBooleanCheckbox value="#{packagingController.selected.calidad}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewPackagingLabel_filePlanomecanicoName}"/>
+                        <h:outputText value="#{packagingController.selected.filePlanomecanicoName}" title="#{bundle.ViewPackagingTitle_filePlanomecanicoName}"/>
+                        <h:outputText value="#{bundle.ViewPackagingLabel_filePlanomecanico}"/>
+                        <h:outputText value="#{packagingController.selected.filePlanomecanico}" title="#{bundle.ViewPackagingTitle_filePlanomecanico}"/>
+                        <h:outputText value="#{bundle.ViewPackagingLabel_fileArteName}"/>
+                        <h:outputText value="#{packagingController.selected.fileArteName}" title="#{bundle.ViewPackagingTitle_fileArteName}"/>
+                        <h:outputText value="#{bundle.ViewPackagingLabel_fileArte}"/>
+                        <h:outputText value="#{packagingController.selected.fileArte}" title="#{bundle.ViewPackagingTitle_fileArte}"/>
+                        <h:outputText value="#{bundle.ViewPackagingLabel_imageFotoName}"/>
+                        <h:outputText value="#{packagingController.selected.imageFotoName}" title="#{bundle.ViewPackagingTitle_imageFotoName}"/>
+                        <h:outputText value="#{bundle.ViewPackagingLabel_imageFoto}"/>
+                        <h:outputText value="#{packagingController.selected.imageFoto}" title="#{bundle.ViewPackagingTitle_imageFoto}"/>
+                        <h:outputText value="#{bundle.ViewPackagingLabel_desarrolloId}"/>
+                        <h:outputText value="#{packagingController.selected.desarrolloId}" title="#{bundle.ViewPackagingTitle_desarrolloId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PackagingViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

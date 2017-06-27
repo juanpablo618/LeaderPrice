@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <title>PACKING</title>
+                <br />
+        <br />
+
+    </h:head>
+    <h:body>
+         <br>PACKING PACKING PACKING DE PRODUCTO </br>
+         <p>Usted esta trabajando con el desarrollo #{elegirDesarrolloBean.desarrollousando}</p>
+         
+        PLANO MECÁNICO
+        <h:form enctype="multipart/form-data">  
+            <p:messages showDetail="true"/> 
+            <p:panelGrid columns="2">
+                
+               
+               
+                 
+                <h:outputLabel for="image" value="ADJUNTAR PLANO MECANICO: *" />
+                <p:fileUpload value="#{planoMecanico.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+                
+                
+                <f:facet name="footer">
+                    <p:commandButton value="Submit" ajax="false" 
+                                     actionListener="#{planoMecanico.upload}"/></f:facet>
+                                     
+                   <h:selectOneMenu id="DESARROLLO_ID" 
+                                value="#{planoMecanico.DESARROLLO_ID}">
+                            
+                                <f:selectItem id="DESARROLLO_ID22" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+                                
+                            </h:selectOneMenu>
+                                   
+                                     
+            </p:panelGrid>
+            
+            
+            
+            
+            <p:spacer height="20"></p:spacer>
+            <p:dataTable value="#{tableBeanPlanoMecanico.allImage}" var="item" paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 60%" >           
+                <f:facet name="header">
+                        <h:outputText value="PLANO MECÁNICO" />
+                    </f:facet>
+                
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Planos mecanicos:" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageName}"/>
+                </p:column>
+                
+                
+                
+                <p:column>
+                     <h:outputLink value="downloadFileServletPackaging">
+                             <f:param name="id" value="#{item.imageID}" />
+                             <h:outputText value="descargar" />
+                     </h:outputLink>
+                </p:column>   
+                
+                <p:column>
+                    <h:commandLink value="eliminar" 
+                                   action="#{tableBeanPlanoMecanico.borrarPlanoMecanico(item.imageID)}" />
+    		</p:column>
+                
+                
+                
+            </p:dataTable>
+        </h:form> 
+        
+        <br />
+        <br />
+        <br />
+                <br />
+        <br />
+
+        
+        FOTO
+        FOTO
+        FOTO
+        <h:form enctype="multipart/form-data">  
+            <p:messages showDetail="true"/> 
+            <p:panelGrid columns="2">
+                
+               <h:outputLabel for="image" value="ADJUNTAR FOTO: *" />
+                <p:fileUpload value="#{fotoPackaging.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+                
+                
+                <f:facet name="footer">
+                    <p:commandButton value="Submit" ajax="false" 
+                                     actionListener="#{fotoPackaging.upload}"/></f:facet>
+                                     
+                                     
+                <h:selectOneMenu id="DESARROLLO_ID" 
+                                value="#{fotoPackaging.DESARROLLO_ID}">
+                            
+                                <f:selectItem id="DESARROLLO_ID33" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+                                
+                            </h:selectOneMenu>                     
+                                     
+                                     
+                                     
+            </p:panelGrid>
+            
+            
+            
+            
+            <p:spacer height="20"></p:spacer>
+            <p:dataTable value="#{tableBeanFotoPackaging.allImage}" var="item" paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 60%" >           
+                <f:facet name="header">
+                        <h:outputText value="FOTO" />
+                    </f:facet>
+                                    
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Items fotos:" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageName}"/>
+                </p:column>
+                
+                <p:column>  
+                    <h:outputLink value="downloadFileServletFoto">
+                           <f:param name="id" value="#{item.imageID}" />
+                        <h:outputText value="descargar" />
+                     </h:outputLink>
+                </p:column>        
+                
+                <p:column>
+                    <h:commandLink value="eliminar" 
+                                   action="#{tableBeanFotoPackaging.borrarFotoPackaging(item.imageID)}" />
+    		</p:column>
+                
+                
+            </p:dataTable>
+        </h:form> 
+
+        
+        <br />
+        <br />
+        <br />
+
+        ARTE
+        ARTE
+        ARTE
+                <br />
+        <br />
+        <br />
+        <br />
+
+        <h:form enctype="multipart/form-data">  
+            <p:messages showDetail="true"/> 
+            <p:panelGrid columns="2">
+             
+                
+                <h:outputLabel for="image" value="ADJUNTAR NUEVO ARTE: *" />
+                <p:fileUpload value="#{artePackaging.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+                
+                <h:selectOneMenu id="DESARROLLO_ID" 
+                                value="#{artePackaging.DESARROLLO_ID}">
+                            
+                                <f:selectItem id="DESARROLLO_ID44" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+                                
+                            </h:selectOneMenu>   
+                
+                
+                <f:facet name="footer">
+                    <p:commandButton value="Submit" ajax="false" 
+                                     actionListener="#{artePackaging.upload}"/></f:facet>
+                                     
+                                     
+                                  
+                                     
+                                     
+            </p:panelGrid>
+            
+            
+            <p:spacer height="20"></p:spacer>
+            <p:dataTable value="#{tableBeanArtePackaging.allImage}" var="item" paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 60%" >           
+                <f:facet name="header">
+                        <h:outputText value="ARTE" />
+                    </f:facet>
+                
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nombre de los archivos Arte:" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageName}"/>
+                </p:column>
+                 
+                <p:column>  
+                    <h:outputLink value="downloadFileServletArte">
+                           <f:param name="id" value="#{item.imageID}" />
+                        <h:outputText value="descargar" />
+                     </h:outputLink>
+                </p:column>      
+                
+                
+                 <p:column>
+                    <h:commandLink value="eliminar" 
+                                   action="#{tableBeanArtePackaging.borrarArtePackaging(item.imageID)}" />
+    		</p:column>
+                
+                
+                
+            </p:dataTable>
+        </h:form> 
+        
+        
+        
+         <br />
+        
+        <h:link outcome="index" value="inicio " />
+        <br />
+        
+         
+        
+        
+    </h:body>
+</html>

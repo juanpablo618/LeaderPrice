@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <title>Auditoria</title>
+    </h:head>
+    <h:body>
+        <h:form enctype="multipart/form-data">  
+            <p:messages showDetail="true"/> 
+            <p:panelGrid columns="2">
+                
+                <p:outputLabel for="fecha" value="fecha: "/>
+                <p:calendar id="fecha" pattern="yyyy/MM/dd" showOn="button" value="#{auditoria.fecha}"/>
+                        
+                 
+                
+                <h:outputLabel for="resultado" value="tipo de auditoria *" />
+                                <h:selectOneMenu id="nombre" 
+                                value="#{auditoria.nombre}">
+                            
+                                <f:selectItem id="item1" itemLabel="CheckList Libertad NON FOOD" itemValue="CheckList Libertad NON FOOD" />
+                                <f:selectItem id="item2" itemLabel="CheckList Libertad - Productos Alimentacios" itemValue="CheckList Libertad - Productos Alimentacios" />
+                                <f:selectItem id="item3" itemLabel="Checklist Basico - Productos Alimentacios" itemValue="Checklist Basico - Productos Alimentacios" />
+                                <f:selectItem id="item4" itemLabel="Checklist Intermedio - Productos Alimentacios" itemValue="Checklist Intermedio - Productos Alimentacios" />
+                            
+                                
+                                </h:selectOneMenu>
+                
+                
+                
+                
+                
+                <h:outputLabel for="resultado" value="resultado: *" />
+                
+                
+                            <h:selectOneMenu id="resultado" 
+                                value="#{auditoria.resultado}">
+                            
+                                <f:selectItem id="item5" itemLabel=" menor a 50% - No aceptable" itemValue="menor a 50% - No aceptable" />
+                                <f:selectItem id="item6" itemLabel="50% - 75% Mejoras inmediatas" itemValue="50% - 75% Mejoras inmediatas" />
+                                <f:selectItem id="item7" itemLabel="75% - 90% Aceptable" itemValue="75% - 90% Aceptable" />
+                                <f:selectItem id="item8" itemLabel=" mayor a 90% Satisfactorio" itemValue="mayor a  90% Satisfactorio" />
+                           
+                            </h:selectOneMenu>
+                
+                
+               
+                
+                <h:outputLabel for="image" value="Select Image: *" />
+                <p:fileUpload value="#{auditoria.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+                
+                
+                <!--<h:outputLabel for="DESARROLLO_ID" value="DESARROLLO_ID *" />
+                <p:inputText id="DESARROLLO_ID" value="#{auditoria.DESARROLLO_ID}"  /> 
+                
+                intento 2<h:inputHidden id="DESARROLLO_ID" value="#{auditoria.DESARROLLO_ID}" />
+                
+                intento 3    <h:inputHidden value="#{elegirDesarrolloBean.desarrollousando}" id="DESARROLLO_ID"  />
+
+                -->
+                <p>Usted esta trabajando con el desarrollo #{elegirDesarrolloBean.desarrollousando}</p>
+                
+                            <h:selectOneMenu id="DESARROLLO_ID" 
+                                value="#{auditoria.DESARROLLO_ID}">
+                            
+                                <f:selectItem id="DESARROLLO_ID22" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+                                
+                            </h:selectOneMenu>
+                
+                
+                
+                
+                
+                <f:facet name="footer">
+                    <p:commandButton value="Submit" ajax="false" 
+                                     actionListener="#{auditoria.upload}"/></f:facet>
+            </p:panelGrid>
+            <p:spacer height="20"></p:spacer>
+            <p:dataTable value="#{tableBeanAuditoria.allImage}" var="item" paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="10,20,50" widgetVar="50" style="width: 60%"
+                         rendered="true"
+                         
+                         >           
+                <f:facet name="header">
+                        <h:outputText value="AUDITORIA" />
+                    </f:facet>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fecha" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageFecha}"/>
+                </p:column>
+                
+                 <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="tipo de Analisis" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageNombre}"/>
+                </p:column>
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Resultado" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageResultado}"/>
+                </p:column>
+                
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Adjunto" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageName}"/>
+                </p:column>
+                
+                <p:column filterBy="#{item.desarrolloId}"  >
+                    <f:facet name="header">
+                        <h:outputText value="desarrolloid" />
+                    </f:facet>
+                    <h:outputText value="#{item.desarrolloId}"/>
+                </p:column>
+                
+               <p:column>
+                   <h:outputLink value="downloadFileServlet">
+                       <f:param name="id" value="#{item.imageID}" />
+                    <h:outputText value="Descargar" />
+                 </h:outputLink>
+                </p:column>
+                
+                
+                <p:column>
+                    <h:commandLink value="eliminar" 
+                                   action="#{tableBeanAuditoria.borrarAuditoria(item.imageID)}" />
+    		    
+                </p:column>
+                
+                <!--
+               <p:column>
+                   <h:outputLink value="borrarAuditoriaFileServlet">
+                       <f:param name="id" value="#{item.imageID}" />
+                    <h:outputText value="eliminar" />
+                 </h:outputLink>
+                </p:column>
+                -->
+                
+           </p:dataTable>
+        </h:form> 
+        
+         <br />
+        
+        <h:link outcome="index" value="inicio " />
+        <br />
+        
+    </h:body>
+</html>

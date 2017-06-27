@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAuditoriaTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="AuditoriaListForm">
+                <p:panel header="#{bundle.ListAuditoriaTitle}">
+                    <p:dataTable value="#{tableBeanControlProducto.allImage}" var="item" paginator="true" rows="5"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="3,5,10" widgetVar="50">           
+
+                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Aspecto" />
+                            </f:facet>
+                            <h:outputText value="#{item.aspecto}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Unidad de Medida" />
+                            </f:facet>
+                            <h:outputText value="#{item.unidadMedida}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Valor de Referencia" />
+                            </f:facet>
+                            <h:outputText value="#{item.valorReferencia}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Año" />
+                            </f:facet>
+                            <h:outputText value="#{item.year}"/>
+                        </p:column>
+                       
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Valor Medido" />
+                            </f:facet>
+                            <h:outputText value="#{item.valorYear}"/>
+                        </p:column>
+                       
+                          <p:column>
+                             <h:commandLink 
+                                 action="#{tableBeanControlProducto.borrarControlProducto(item.imageID)}">
+                                 <img src="images/delet.jpg"  title="Eliminar" align="right"></img></h:commandLink>
+                           
+                           <p:commandButton id="editButton"   icon="ui-icon-pencil"    />
+                               
+                          </p:column> 
+                        
+                        <f:facet name="footer">
+                            <p:commandButton id="createControlProducto" icon="ui-icon-plus"   value="Nuevo Control" actionListener="#{controlProducto.prepareCreate}" update=":ControlProductoCreateForm" oncomplete="PF('ControlProductoCreateDialog').show()"/>
+                        
+                        </f:facet>  
+                        
+                        
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="CreateControlProducto.xhtml"/>
+
+        </ui:define>
+    </ui:composition>
+
+</html>
+

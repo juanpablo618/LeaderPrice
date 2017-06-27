@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPackagingTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="PackagingListForm">
+                <p:growl id="growlmsg2" showDetail="true" sticky="true" autoUpdate="true"/>
+                <p:panel header="#{bundle.ListPackagingTitle}">
+                    <p:dataTable id="datalistPlanoMecanico" value="#{tableBeanPlanoMecanico.filtrado(elegirDesarrolloBean.desarrollousando)}" var="item" paginator="true" rows="5"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="3,5,10" widgetVar="50"
+                                  emptyMessage="No existen planos mecanicos para este desarrollo"
+                                 >           
+                        <f:facet name="header">
+                            <h:outputText value="PLANO MECÁNICO" />
+                        </f:facet>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Adjuntos Planos:" />
+                            </f:facet>
+                            <h:outputText value="#{item.imageName}"/>
+                        </p:column>
+                        <p:column width="25">                   
+                            <h:outputLink value="downloadFileServletPackaging">
+                                <f:param name="id" value="#{item.imageID}" />
+                                <img src="images/pdf.png"  title="Descargar PDF"></img>
+                            </h:outputLink> 
+                        </p:column>
+                        <p:column width="25">
+                            <h:outputLink value="deletePlano" >
+                                
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash" actionListener="#{tableBeanPlanoMecanico.borrarPlanoMecanico(item.imageID)}" title="Eliminar" update=":growl,datalistPlanoMecanico">
+                                <p:confirm header="Confirmación" message="Esta seguro de Eliminar?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                       <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                          <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                          <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>       
+                            
+                            </h:outputLink>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createPlano" icon="ui-icon-plus"   value="Nuevo Plano" actionListener="#{packagingController.prepareCreate}" update=":PackagingCreateFormP" oncomplete="PF('PackagingCreateDialogP').show()"/>
+                        </f:facet>
+                    </p:dataTable>
+
+                    <p:spacer height="25"></p:spacer>
+                    <p:dataTable id="datalistFotos" value="#{tableBeanFotoPackaging.filtrado(elegirDesarrolloBean.desarrollousando)}" var="item" paginator="true" rows="5"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="3,5,10" widgetVar="50"
+                                 emptyMessage="No existen Fotos para este desarrollo"
+                                 >           
+                        <f:facet name="header">
+                            <h:outputText value="FOTOS" />
+                        </f:facet>         
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Adjuntos Fotos:" />
+                            </f:facet>
+                            <h:outputText value="#{item.imageName}"/>
+                        </p:column>
+                        <p:column width="25">                   
+                            <h:outputLink value="downloadFileServletFoto">
+                                <f:param name="id" value="#{item.imageID}" />
+                                <img src="images/pdf.png"  title="Descargar PDF"></img>
+                            </h:outputLink>
+                        </p:column>
+                        <p:column width="25"> 
+                            <h:outputLink value="deleteFotos" >
+                                
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash" actionListener="#{tableBeanFotoPackaging.borrarFotoPackaging(item.imageID)}" title="Eliminar" update=":growl,datalistFotos">
+                                <p:confirm header="Confirmación" message="Esta seguro de Eliminar?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                       <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                          <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                          <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>       
+                            
+                            </h:outputLink>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createFoto" icon="ui-icon-plus"   value="Nuevo Foto" actionListener="#{packagingController.prepareCreate}" update=":PackagingCreateFormF" oncomplete="PF('PackagingCreateDialogF').show()"/>
+                        </f:facet>
+                    </p:dataTable>
+
+                    <p:spacer height="25"></p:spacer>
+                    <p:dataTable id="datalistArte" value="#{tableBeanArtePackaging.filtrado(elegirDesarrolloBean.desarrollousando)}" var="item" paginator="true" rows="5"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="3,5,10" widgetVar="50"
+                                 emptyMessage="No existen Artes para este desarrollo"
+                                 >           
+                        <f:facet name="header">
+                            <h:outputText value="ARTE" />
+                        </f:facet>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Adjuntos Arte:" />
+                            </f:facet>
+                            <h:outputText value="#{item.imageName}"/>
+                        </p:column>
+                        <p:column width="25">                   
+                            <h:outputLink value="downloadFileServletArte">
+                                <f:param name="id" value="#{item.imageID}" />
+                                <img src="images/pdf.png"  title="Descargar PDF"></img>
+                            </h:outputLink> 
+                        </p:column>
+                        <p:column width="25">
+                            <h:outputLink value="deleteArte">
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash" actionListener="#{tableBeanArtePackaging.borrarArtePackaging(item.imageID)}" title="Eliminar" update=":growl,datalistArte">
+                                <p:confirm header="Confirmación" message="Esta seguro de Eliminar?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                       <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                          <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                          <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>       
+                            
+                            </h:outputLink>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createArte" icon="ui-icon-plus"   value="Nuevo Arte" actionListener="#{packagingController.prepareCreate}" update=":PackagingCreateFormA" oncomplete="PF('PackagingCreateDialogA').show()"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="CreatePlano.xhtml"/>
+            <ui:include src="CreateFoto.xhtml"/>
+            <ui:include src="CreateArte.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

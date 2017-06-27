@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AuditoriaCreateDlg" widgetVar="AuditoriaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAuditoriaTitle}">
+            <h:form id="AuditoriaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{auditoriaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_auditoriaId}" for="auditoriaId" />
+                        <p:inputText id="auditoriaId" value="#{auditoriaController.selected.auditoriaId}" title="#{bundle.CreateAuditoriaTitle_auditoriaId}" required="true" requiredMessage="#{bundle.CreateAuditoriaRequiredMessage_auditoriaId}"/>
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{auditoriaController.selected.fecha}" title="#{bundle.EditAuditoriaTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_tipoAuditoria}" for="tipoAuditoria" />
+                        <p:inputText id="tipoAuditoria" value="#{auditoriaController.selected.tipoAuditoria}" title="#{bundle.CreateAuditoriaTitle_tipoAuditoria}" />
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_resultado}" for="resultado" />
+                        <p:inputText id="resultado" value="#{auditoriaController.selected.resultado}" title="#{bundle.CreateAuditoriaTitle_resultado}" />
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_fileInformeName}" for="fileInformeName" />
+                        <p:inputText id="fileInformeName" value="#{auditoriaController.selected.fileInformeName}" title="#{bundle.CreateAuditoriaTitle_fileInformeName}" />
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_fileInforme}" for="fileInforme" />
+                        <p:inputTextarea rows="4" cols="30" id="fileInforme" value="#{auditoriaController.selected.fileInforme}" title="#{bundle.CreateAuditoriaTitle_fileInforme}" />
+                        <p:outputLabel value="#{bundle.CreateAuditoriaLabel_desarrolloId}" for="desarrolloId" />
+                        <p:inputText id="desarrolloId" value="#{auditoriaController.selected.desarrolloId}" title="#{bundle.CreateAuditoriaTitle_desarrolloId}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{auditoriaController.create}" value="#{bundle.Save}" update="display,:AuditoriaListForm:datalist,:growl" oncomplete="handleSubmit(args,'AuditoriaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AuditoriaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

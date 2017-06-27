@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListReclamosTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ReclamosListForm">
+                <p:panel header="#{bundle.ListReclamosTitle}">
+                    <p:dataTable id="datalist" value="#{reclamosController.items}" var="item"
+                                 selectionMode="single" selection="#{reclamosController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.reclamosId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_reclamosId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reclamosId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_nroConformidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nroConformidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_nombreCliente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreCliente}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_motivoReclamo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.motivoReclamo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_sucursal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sucursal}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_medioRecepcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.medioRecepcion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_nombreRecepcionista}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreRecepcionista}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_muestras}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.muestras}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_medidas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.medidas}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_fechaReclamo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaReclamo}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_imageFotoreclamoName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.imageFotoreclamoName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_imageFotoreclamo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.imageFotoreclamo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_proveedorId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.proveedorId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_nombreRecepcionProveedor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreRecepcionProveedor}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_fechaRecepcionProveedor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaRecepcionProveedor}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_causas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.causas}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_acciones}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.acciones}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_responsable}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.responsable}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReclamosTitle_productoNoConforme}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.productoNoConforme}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{reclamosController.prepareCreate}" update=":ReclamosCreateForm" oncomplete="PF('ReclamosCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ReclamosViewForm" oncomplete="PF('ReclamosViewDialog').show()" disabled="#{empty reclamosController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ReclamosEditForm" oncomplete="PF('ReclamosEditDialog').show()" disabled="#{empty reclamosController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{reclamosController.destroy}" update=":growl,datalist" disabled="#{empty reclamosController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

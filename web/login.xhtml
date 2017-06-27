@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Login Calidad</title>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
+        <style>
+            html{
+                margin: 0px; width: 100%; height: 100%;
+            }
+            #titulo{
+                color: gainsboro;font-family: serif; font-size: 3em;
+
+            }
+        </style>
+    </h:head>
+    <h:body style="background-image: -webkit-gradient(
+            linear,
+            right bottom,
+            right top,
+            color-stop(0, #EDEDED),
+            color-stop(0.08, #EAEAEA),
+            color-stop(1, #2F2F2F),
+            color-stop(1, #AAAAAA)
+            ); ">
+        <center><p:outputLabel value="DESARROLLO MARCA PROPIA" id="titulo" /></center>
+
+        
+        
+        
+        <h:form style="margin-top: 10%; margin-left: 33%;" >
+        
+            <p:growl id="mensajes" showDetail="true" life="2500" autoUpdate="true" />
+        
+            <p:panel header="Ingrese su Cuenta por favor . . ." style="font-family: inherit;width:330px; text-align: center; background-color: #4D729F;">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <i class="fa fa-user fa-fw" style="color: white"/>
+                    <p:inputText value="#{login.user}" id="username"
+                                 required="true" label="Usuario" placeholder="Usuario" style="font-family: serif;"/>
+                    <i class="fa fa-key fa-fw" style=" color: white" />
+                    <p:password value="#{login.pwd}" id="password" required="true"
+                                label="Password" placeholder="Password" style="font-family: serif;"/>
+                    <f:facet name="footer">
+                        <p:commandButton id="loginButton" value="Ingresar" action="#{login.validateUsernamePassword}" 
+                                         style="font-family: sans-serif; margin-left: 8%;" icon="ui-icon-check"></p:commandButton>
+                    </f:facet>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+        <center>
+            <img src="images/libertad.png" style="margin-top: 80px;"></img>
+        </center>
+    </h:body>
+
+
+</html>
+

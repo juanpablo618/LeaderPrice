@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <title>ACUERDO COMERCIAL </title>
+    </h:head>
+    <h:body>
+        <h:form enctype="multipart/form-data">  
+            <p:messages showDetail="true"/> 
+            <p:panelGrid columns="2">
+                
+                <p:outputLabel for="fecha" value="fecha: "/>
+                <p:calendar id="fecha" pattern="yyyy/MM/dd" showOn="button" value="#{acuerdoComercial.fecha}"/>
+                        
+                
+                <h:outputLabel for="resultado" value="Proveedor *" />
+                <!--<p:inputText id="resultado" value="#{acuerdoComercial.resultado}"  /> 
+                -->
+                <p:selectOneMenu id="resultado" style="width: 185px;" value="#{acuerdoComercial.resultado}" >
+                           <f:selectItems  value="#{proveedorController.itemsAvailableSelectOne}"
+                                          var="proveedorIdItem"
+                                          itemValue="#{proveedorIdItem.proveedorId}"/>
+                </p:selectOneMenu>
+                
+                
+                <h:outputLabel for="image" value="Adjuntar Acuerdo: *" />
+                <p:fileUpload value="#{acuerdoComercial.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+                
+                
+                 
+                <f:facet name="footer">
+                    <p:commandButton value="Submit" ajax="false" 
+                                     actionListener="#{acuerdoComercial.upload}"/></f:facet>
+            </p:panelGrid>
+            <p:spacer height="20"></p:spacer>
+            <p:dataTable value="#{tableBeanAcuerdoComercial.allImage}" var="item" paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 60%" >           
+                <f:facet name="header">
+                        <h:outputText value="ACUERDO COMERCIAL DE PRODUCTO" />
+                    </f:facet>
+                
+                 <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="PROVEEDOR" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageNombre}"/>
+                </p:column>
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="fecha" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageFecha}"/>
+                </p:column>
+                
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Adjunto" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageName}"/>
+                </p:column>
+                
+                  <p:column>
+                   <h:outputLink value="downloadFileServletAcuerdoComercial">
+                       <f:param name="id" value="#{item.imageID}" />
+                    <h:outputText value="Descargar" />
+                 </h:outputLink>
+                </p:column>
+                
+                
+                <p:column>
+                    <h:commandLink value="eliminar" 
+                                   action="#{tableBeanAcuerdoComercial.borrarAcuerdoComercial(item.imageID)}" />
+    		</p:column>
+                
+                
+            </p:dataTable>
+        </h:form> 
+        
+         <br />
+        
+        <h:link outcome="index" value="inicio " />
+        <br />
+        
+        
+        
+    </h:body>
+</html>

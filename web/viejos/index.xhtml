@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        
+        
+        
+         <h:form>
+            <p>BIENVENIDO #{login.user}</p>
+            <br />
+            <br />
+            <p>Usted esta trabajando con el desarrollo #{elegirDesarrolloBean.desarrollousando}</p>
+            <p>Usted esta trabajando con el Producto: #{elegirDesarrolloBean.productousando}</p>
+            <p>Su codigo de desarrollo es: #{elegirDesarrolloBean.codigoDesarrollousando}</p>
+            
+            
+            <h:commandLink action="#{login.logout}" value="Logout"></h:commandLink>
+        </h:form>
+
+
+
+        <br />
+        <br />
+        
+        <!--<h:form>
+            <p:commandButton value="Download" ajax="false"  icon="ui-icon-arrowthick-1-s">
+                <p:fileDownload value="#{descargaRne.file}" />
+
+            </p:commandButton>
+        </h:form>
+        -->
+        
+        
+        
+        
+        
+        
+        <br />
+        <br />
+        <h:link outcome="car" value="alertas a ver !!" />
+        <br />
+        <br />
+
+        
+        <br />
+
+        <h:link outcome="Auditoria" value="AUDITORIA" />
+        <br />
+
+
+        <br />
+
+        <h:link outcome="imageupload" value="Analisis sensorial" />
+        <br />
+        <br />
+        
+        
+        <br />
+        <br />
+        <h:link outcome="packaging" value="PACKAGING !!" />
+        <br />
+        <br />
+
+        <h:link outcome="Reclamo" value="RECLAMOS " />
+        <br />
+
+        <br />
+
+        
+        <br />
+        <h:link outcome="datoslegales" value=" DATOS LEGALES " />
+        <br />
+<br />
+
+        
+        <br />
+
+        <br />
+        <br />
+        <br />
+        <h:link outcome="fichatecnica" value="fichas técnicas" />
+        <br />
+        <br />
+        <h:link outcome="preauditoria" value="Pre Auditorías" />
+        <br />
+        <br />
+        <h:link outcome="acuerdocomercial" value="ACUERDO COMERCIAL" />
+        <br />
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        Hello from Facelets
+        <br />
+        <h:link outcome="/aspecto/List" value="Show All Aspecto Items"/>
+        <br />
+        <br />
+        <h:link outcome="/controlProducto/List" value="Show All ControlProducto Items"/>
+        <br />
+        
+        
+        <h:link outcome="/desarrollo/List" value="Show All Desarrollo Items"/>
+        <br />
+       <h:link outcome="/producto/List" value="Productos"/>
+        <br />
+        <h:link outcome="/proveedor/List" value="Proveedores"/>
+        <br />
+
+             <!--    
+        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+        <br />
+        <h:link outcome="/auditoria/List" value="Show All Auditoria Items"/>
+        <br />
+        
+             
+             <h:link outcome="/analisisSensorial/List" value="Show All AnalisisSensorial Items"/>
+        <br />
+        
+             
+        <h:link outcome="/acuerdoComercial/List" value="Show All AcuerdoComercial Items"/>
+        <br />
+        
+             <h:link outcome="/car/List" value="Show All Car Items"/>
+        <br />
+        
+             <h:link outcome="/certificado/List" value="Show All Certificado Items"/>
+        <br />
+        
+             
+             <h:link outcome="/packaging/List" value="Show All Packaging Items"/>
+        <br />
+        
+             
+             <h:link outcome="/reclamos/List" value="Show All Reclamos Items"/>
+        <br />
+     <h:link outcome="/habilitacionProducto/List" value="Show All HabilitacionProducto Items"/>
+        
+             
+             
+             <br />
+        <h:link outcome="/fichaTecnica/List" value="Show All FichaTecnica Items"/>
+        <h:link outcome="/datosLegales/List" value="Show All DatosLegales Items"/>
+        <br />
+        
+       <br />
+        <h:link outcome="/preAuditoria/List" value="Show All PreAuditoria Items"/>
+        
+        
+ 
+        <h:link outcome="/rne/List" value="Show All Rne Items"/>
+        <br />
+          <h:link outcome="/uploadImage/List" value="Show All UploadImage Items"/>
+    -->
+    
+    
+    </h:body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
+

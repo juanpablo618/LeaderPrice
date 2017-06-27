@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>
+
+
+
+            <navigation-rule>
+                    <from-view-id>/login.xhtml</from-view-id>
+                    <navigation-case>
+                    <from-outcome>desarrollo</from-outcome>
+                    <to-view-id>/desarrollo/List.xhtml</to-view-id>
+                    </navigation-case>
+            </navigation-rule>
+            
+            <navigation-rule>
+                <from-view-id>/desarrollo/List.xhtml</from-view-id>
+                <navigation-case>
+                    <from-outcome>logout</from-outcome>
+                    <to-view-id>/login.xhtml</to-view-id>
+                </navigation-case>
+            </navigation-rule>
+    
+    
+            <navigation-rule>
+                <from-view-id>/controlProducto2/List.xhtml</from-view-id>
+                    <navigation-case>
+                        <from-outcome>logout</from-outcome>
+                        <to-view-id>/login.xhtml</to-view-id>
+                    </navigation-case>
+            </navigation-rule>
+        
+            
+            <navigation-rule>
+            <from-view-id>/Auditoria.xhtml</from-view-id>
+                            <navigation-case>
+                                <from-outcome>logout</from-outcome>
+                                <to-view-id>/login.xhtml</to-view-id>
+                            </navigation-case>
+            </navigation-rule>        
+    
+                <navigation-rule>
+                            <from-view-id>/Reclamo.xhtml</from-view-id>
+                            <navigation-case>
+                                <from-outcome>logout</from-outcome>
+                                <to-view-id>/login.xhtml</to-view-id>
+                            </navigation-case>
+            </navigation-rule>  
+    
+    
+                <navigation-rule>
+                            <from-view-id>/packaging.xhtml</from-view-id>
+                            <navigation-case>
+                                <from-outcome>logout</from-outcome>
+                                <to-view-id>/login.xhtml</to-view-id>
+                            </navigation-case>
+            </navigation-rule>      
+    
+    
+    
+                <navigation-rule>
+                            <from-view-id>/datoslegales.xhtml</from-view-id>
+                            <navigation-case>
+                                <from-outcome>logout</from-outcome>
+                                <to-view-id>/login.xhtml</to-view-id>
+                            </navigation-case>
+            </navigation-rule>      
+    
+    
+                <navigation-rule>
+                            <from-view-id>/acuerdocomercial.xhtml</from-view-id>
+                            <navigation-case>
+                                <from-outcome>logout</from-outcome>
+                                <to-view-id>/login.xhtml</to-view-id>
+                            </navigation-case>
+            </navigation-rule>      
+    
+    
+            <navigation-rule>
+                <from-view-id>/preauditoria.xhtml</from-view-id>
+                    <navigation-case>
+                        <from-outcome>logout</from-outcome>
+                        <to-view-id>/login.xhtml</to-view-id>
+                    </navigation-case>
+            </navigation-rule>
+            
+            <navigation-rule>
+                <from-view-id>/fichatecnica.xhtml</from-view-id>
+                    <navigation-case>
+                        <from-outcome>logout</from-outcome>
+                        <to-view-id>/login.xhtml</to-view-id>
+                    </navigation-case>
+            </navigation-rule>
+    
+            <navigation-rule>
+                <from-view-id>/analisisSensorial.xhtml</from-view-id>
+                    <navigation-case>
+                        <from-outcome>logout</from-outcome>
+                        <to-view-id>/login.xhtml</to-view-id>
+                    </navigation-case>
+            </navigation-rule>
+    
+    
+            <navigation-rule>
+                <from-view-id>/car.xhtml</from-view-id>
+                    <navigation-case>
+                        <from-outcome>logout</from-outcome>
+                        <to-view-id>/login.xhtml</to-view-id>
+                    </navigation-case>
+            </navigation-rule>
+    
+    
+    
+    
+    
+                    <navigation-rule>
+                            <from-view-id>/producto/List.xhtml</from-view-id>
+                            <navigation-case>
+                                <from-outcome>logout</from-outcome>
+                                <to-view-id>/login.xhtml</to-view-id>
+                            </navigation-case>
+            </navigation-rule>
+    
+            <navigation-rule>
+                <from-view-id>/proveedor/List.xhtml</from-view-id>
+                    <navigation-case>
+                        <from-outcome>logout</from-outcome>
+                        <to-view-id>/login.xhtml</to-view-id>
+                    </navigation-case>
+            </navigation-rule>
+            
+            <navigation-rule>
+                <from-view-id>/desarrollo/List.xhtml</from-view-id>
+                    <navigation-case>
+                        <from-outcome>logout</from-outcome>
+                        <to-view-id>/login.xhtml</to-view-id>
+                    </navigation-case>
+            </navigation-rule>
+            
+    
+    </faces-config>

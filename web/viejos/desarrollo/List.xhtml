@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListDesarrolloTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <p>Usted esta trabajando con el desarrollo: #{elegirDesarrolloBean.desarrollousando}</p>
+            <p>Usted esta trabajando con el Producto: #{elegirDesarrolloBean.productousando}</p>
+            <p>Su codigo de desarrollo es: #{elegirDesarrolloBean.codigoDesarrollousando}</p>
+            
+            <!--<h:form>
+                
+                <h:selectOneMenu id="nombre" 
+                                value="#{listenerView.text2}">
+                      <p:ajax event="blur" update="out2" />       
+                                
+                                <f:selectItem id="item2" itemLabel="nuevo pruducto" itemValue="NP" />
+                                <f:selectItem id="item3" itemLabel="Cambio de producto" itemValue="CP" />
+                                <f:selectItem id="item4" itemLabel="Duplicación de producto" itemValue="DP" />
+                
+                </h:selectOneMenu>
+                
+               
+               <h:outputText id="out2" value="#{listenerView.text2}" /> 
+                
+            </h:form> -->
+            
+                                 
+
+            <h:form id="DesarrolloListForm">
+                <p:panel header="#{bundle.ListDesarrolloTitle}">
+                    <p:dataTable id="datalist" value="#{desarrolloController.items}" var="item"
+                                 selectionMode="single" selection="#{desarrolloController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.desarrolloId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDesarrolloTitle_desarrolloId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.desarrolloId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDesarrolloTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDesarrolloTitle_tipoProyecto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoProyecto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDesarrolloTitle_codigoComercial}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codigoComercial}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDesarrolloTitle_ubicacionFisica}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ubicacionFisica}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDesarrolloTitle_codigoDesarrollo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codigoDesarrollo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDesarrolloTitle_proveedorId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.proveedorId.nombreContacto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDesarrolloTitle_productoId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.productoId.nombre}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{desarrolloController.prepareCreate}" update=":DesarrolloCreateForm" oncomplete="PF('DesarrolloCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DesarrolloViewForm" oncomplete="PF('DesarrolloViewDialog').show()" disabled="#{empty desarrolloController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DesarrolloEditForm" oncomplete="PF('DesarrolloEditDialog').show()" disabled="#{empty desarrolloController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{desarrolloController.destroy}" update=":growl,datalist" disabled="#{empty desarrolloController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+    
+    
+    
+</html>

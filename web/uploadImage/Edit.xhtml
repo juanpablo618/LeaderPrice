@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UploadImageEditDlg" widgetVar="UploadImageEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUploadImageTitle}">
+            <h:form id="UploadImageEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{uploadImageController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditUploadImageLabel_imageId}" for="imageId" />
+                        <p:inputText id="imageId" value="#{uploadImageController.selected.imageId}" title="#{bundle.EditUploadImageTitle_imageId}" required="true" requiredMessage="#{bundle.EditUploadImageRequiredMessage_imageId}"/>
+                        <p:outputLabel value="#{bundle.EditUploadImageLabel_imageName}" for="imageName" />
+                        <p:inputText id="imageName" value="#{uploadImageController.selected.imageName}" title="#{bundle.EditUploadImageTitle_imageName}" required="true" requiredMessage="#{bundle.EditUploadImageRequiredMessage_imageName}"/>
+                        <p:outputLabel value="#{bundle.EditUploadImageLabel_image}" for="image" />
+                        <p:inputTextarea rows="4" cols="30" id="image" value="#{uploadImageController.selected.image}" title="#{bundle.EditUploadImageTitle_image}" required="true" requiredMessage="#{bundle.EditUploadImageRequiredMessage_image}"/>
+                        <p:outputLabel value="#{bundle.EditUploadImageLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{uploadImageController.selected.nombre}" title="#{bundle.EditUploadImageTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditUploadImageLabel_resultado}" for="resultado" />
+                        <p:inputText id="resultado" value="#{uploadImageController.selected.resultado}" title="#{bundle.EditUploadImageTitle_resultado}" required="true" requiredMessage="#{bundle.EditUploadImageRequiredMessage_resultado}"/>
+                        <p:outputLabel value="#{bundle.EditUploadImageLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{uploadImageController.selected.fecha}" title="#{bundle.EditUploadImageTitle_fecha}" required="true" requiredMessage="#{bundle.EditUploadImageRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditUploadImageLabel_desarrolloId}" for="desarrolloId" />
+                        <p:inputText id="desarrolloId" value="#{uploadImageController.selected.desarrolloId}" title="#{bundle.EditUploadImageTitle_desarrolloId}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{uploadImageController.update}" value="#{bundle.Save}" update="display,:UploadImageListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UploadImageEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UploadImageEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

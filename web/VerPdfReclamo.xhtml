@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        
+        <p:dialog  id="RneCreateDlg" widgetVar="ReclamosVERDialog" modal="true" resizable="false" appendTo="@(body)" header="Ver Reclamo">
+          
+            <h:form id="ReclamoVerForm" enctype="multipart/form-data">  
+                
+                <p:messages showDetail="true"/> 
+                <p:panelGrid columns="2" >
+                    
+                        <p:column>Reclamo N°:</p:column>   
+                        <p:column> <br> #{reclamoController.imageID.toString()} </br> </p:column>   
+                        
+                        <p:column>NRO de conformidad:</p:column>
+                        <p:column> #{reclamoController.NRO_CONFORMIDAD.toString()}</p:column> 
+
+                        <p:column>Nombre de cliente:</p:column>
+                        <p:column> #{reclamoController.NOMBRE_CLIENTE.toString()} </p:column>
+                    
+                        <p:column>Producto no conforme:</p:column>
+                        <p:column> <h:outputText value="#{productoController.getProducto(reclamoController.PRODUCTO_NO_CONFORME).toString()}"/> </p:column>
+                     
+                        <p:column>Motivo del reclamo:</p:column>
+                        <p:column> #{reclamoController.MOTIVO_RECLAMO.toString()} </p:column>
+                   
+                        <p:column>Sucursal:</p:column>
+                        <p:column> #{reclamoController.SUCURSAL.toString()}</p:column>
+                        <p:column>Medio de recepción:</p:column>
+                        <p:column> #{reclamoController.MEDIO_RECEPCION.toString()} </p:column>
+                    
+                        <p:column>Nombre del recepcionista:</p:column>
+                        <p:column> #{reclamoController.NOMBRE_RECEPCIONISTA.toString()} </p:column>
+                    
+                        <p:column>Muestras:</p:column>
+                        <p:column> #{reclamoController.MUESTRAS.toString()} </p:column>
+                        <p:column>Medidas:</p:column>
+                        <p:column> #{reclamoController.MEDIDAS.toString()} </p:column>
+
+                        <p:column>Fecha del reclamo:</p:column>
+                        <p:column>#{reclamoController.FECHA_RECLAMO.toString()} </p:column>
+
+                        <p:column>Proveedor:</p:column>
+                        <h:outputText value="#{proveedorController.getProveedor(reclamoController.PROVEEDOR_ID).toString()}"/>
+
+                    
+                    
+                    <p:column>Fecha de recepción del proveedor:</p:column>
+                    <p:column> #{reclamoController.FECHA_RECEPCION_PROVEEDOR.toString()} </p:column>
+                    
+                    <p:column>Nombre de recepción del proveedor:</p:column>
+                    <p:column> #{reclamoController.NOMBRE_RECEPCION_PROVEEDOR.toString()}</p:column>
+                    
+                    
+                    <p:column>CAUSAS:</p:column>
+                    <p:column> #{reclamoController.CAUSAS.toString()}</p:column>
+                    
+                    <p:column>ACCIONES:</p:column>
+                    <p:column> #{reclamoController.ACCIONES.toString()} </p:column>
+                    
+                    <p:column>RESPONSABLE:</p:column>
+                    <p:column> #{reclamoController.RESPONSABLE.toString()} </p:column>
+                    
+                    <p:column>FOTO</p:column>
+                     <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Imagen" />
+                            </f:facet>
+                            <h:outputLink value="DisplayImage?Image_id=#{reclamoController.imageID}" target="_blank" >
+                                <h:graphicImage value="DisplayImage?Image_id=#{reclamoController.imageID}" width="70" height="70"></h:graphicImage>
+                            </h:outputLink>
+                    </p:column>
+                    
+               
+                    
+                 </p:panelGrid>
+                
+           </h:form>                    
+        </p:dialog>
+     </ui:composition>
+</html>

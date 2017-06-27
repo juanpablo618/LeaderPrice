@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ControlProducto2EditDlg" widgetVar="ControlProducto2EditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditControlProducto2Title}">
+            <h:form id="ControlProducto2EditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{controlProducto2Controller.selected != null}">
+                        <p:outputLabel value="#{bundle.EditControlProducto2Label_controlproducto2ID}" for="controlproducto2ID" />
+                        <p:inputText id="controlproducto2ID" value="#{controlProducto2Controller.selected.controlproducto2ID}" title="#{bundle.EditControlProducto2Title_controlproducto2ID}" required="true" requiredMessage="#{bundle.EditControlProducto2RequiredMessage_controlproducto2ID}"/>
+                        <p:outputLabel value="#{bundle.EditControlProducto2Label_aspecto}" for="aspecto" />
+                        <p:inputText id="aspecto" value="#{controlProducto2Controller.selected.aspecto}" title="#{bundle.EditControlProducto2Title_aspecto}" />
+                        <p:outputLabel value="#{bundle.EditControlProducto2Label_productoId}" for="productoId" />
+                        <p:inputText id="productoId" value="#{controlProducto2Controller.selected.productoId}" title="#{bundle.EditControlProducto2Title_productoId}" />
+                        <p:outputLabel value="#{bundle.EditControlProducto2Label_unidadDeMedida}" for="unidadDeMedida" />
+                        <p:inputText id="unidadDeMedida" value="#{controlProducto2Controller.selected.unidadDeMedida}" title="#{bundle.EditControlProducto2Title_unidadDeMedida}" />
+                        <p:outputLabel value="#{bundle.EditControlProducto2Label_valorDeReferencia}" for="valorDeReferencia" />
+                        <p:inputText id="valorDeReferencia" value="#{controlProducto2Controller.selected.valorDeReferencia}" title="#{bundle.EditControlProducto2Title_valorDeReferencia}" />
+                        <p:outputLabel value="#{bundle.EditControlProducto2Label_year}" for="year" />
+                        <p:inputText id="year" value="#{controlProducto2Controller.selected.year}" title="#{bundle.EditControlProducto2Title_year}" />
+                        <p:outputLabel value="#{bundle.EditControlProducto2Label_valorYear}" for="valorYear" />
+                        <p:inputText id="valorYear" value="#{controlProducto2Controller.selected.valorYear}" title="#{bundle.EditControlProducto2Title_valorYear}" />
+                        <p:outputLabel value="#{bundle.EditControlProducto2Label_desarrolloId}" for="desarrolloId" />
+                        <p:inputText id="desarrolloId" value="#{controlProducto2Controller.selected.desarrolloId}" title="#{bundle.EditControlProducto2Title_desarrolloId}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{controlProducto2Controller.update}" value="#{bundle.Save}" update="display,:ControlProducto2ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ControlProducto2EditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ControlProducto2EditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

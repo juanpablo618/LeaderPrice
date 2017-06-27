@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <title>DATOS LEGALES </title>
+    </h:head>
+    <h:body>
+        <br>RNE </br>
+        
+        <h:form enctype="multipart/form-data">  
+            <p:messages showDetail="true"/> 
+            <p:panelGrid columns="2">
+                
+                <p:outputLabel for="fecha" value="fecha: "/>
+                <p:calendar id="fecha" pattern="yyyy/MM/dd" showOn="button" value="#{rne.fecha}"/>
+                        
+                
+               
+                
+                <h:outputLabel for="image" value="Adjuntar RNE *" />
+                <p:fileUpload value="#{rne.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+                
+                
+                <h:selectOneMenu id="DESARROLLO_ID" 
+                                value="#{rne.DESARROLLO_ID}">
+                            
+                                <f:selectItem id="DESARROLLO_ID2" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+                                
+                            </h:selectOneMenu>
+                
+                
+                <f:facet name="footer">
+                    <p:commandButton value="Submit" ajax="false" 
+                                     actionListener="#{rne.upload}"/></f:facet>
+            </p:panelGrid>
+            <p:spacer height="20"></p:spacer>
+            <p:dataTable value="#{tableBeanRne.allImage}" var="item" paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 60%" >           
+                <f:facet name="header">
+                        <h:outputText value="RNE" />
+                    </f:facet>
+                
+       
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="fecha" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageFecha}"/>
+                </p:column>
+                
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Adjunto" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageName}"/>
+                </p:column>
+                
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="desarrollo id" />
+                    </f:facet>
+                    <h:outputText value="#{item.desarrolloId}"/>
+                </p:column>
+                
+                
+                
+                <p:column>
+                   <h:outputLink value="downloadFileServletRne">
+                       <f:param name="id" value="#{item.imageID}" />
+                    <h:outputText value="Descargar" />
+                 </h:outputLink>
+                </p:column>
+                
+                   <p:column>
+                    <h:commandLink value="eliminar" 
+                                   action="#{tableBeanRne.borrarRne(item.imageID)}" />
+    		</p:column>
+                
+            </p:dataTable>
+        </h:form>
+        
+        
+        <br>////////////////</br>
+        
+        <br>Habilitación de producto</br>
+        
+        
+        
+        
+        <h:form enctype="multipart/form-data">  
+            <p:messages showDetail="true"/> 
+            <p:panelGrid columns="2">
+                
+                <p:outputLabel for="fecha" value="fecha de vencimiento: "/>
+                <p:calendar id="fecha" pattern="yyyy/MM/dd" showOn="button" value="#{habilitacionProducto.fecha}"/>
+                        
+                
+               
+                
+                <h:outputLabel for="image" value="Adjuntar RNE *" />
+                <p:fileUpload value="#{habilitacionProducto.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+                
+                
+                <h:selectOneMenu id="DESARROLLO_ID" 
+                value="#{habilitacionProducto.DESARROLLO_ID}">
+                            
+                <f:selectItem id="DESARROLLO_ID3" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+                                
+                </h:selectOneMenu>
+                
+                
+                <f:facet name="footer">
+                    <p:commandButton value="Submit" ajax="false" 
+                                     actionListener="#{habilitacionProducto.upload}"/></f:facet>
+            </p:panelGrid>
+            <p:spacer height="20"></p:spacer>
+            <p:dataTable value="#{tableBeanHabilitacionProducto.allImage}" var="item" paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 60%" >           
+                <f:facet name="header">
+                        <h:outputText value="Habilitación de producto" />
+                    </f:facet>
+                
+       
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="VENCIMIENTO" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageFecha}"/>
+                </p:column>
+                
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Adjunto" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageName}"/>
+                </p:column>
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="desarrollo id" />
+                    </f:facet>
+                    <h:outputText value="#{item.desarrolloId}"/>
+                </p:column>
+                
+                <p:column>
+                   <h:outputLink value="downloadFileServletRne">
+                       <f:param name="id" value="#{item.imageID}" />
+                    <h:outputText value="Descargar" />
+                 </h:outputLink>
+                </p:column>
+                
+                 <p:column>
+                    <h:commandLink value="eliminar" 
+                                   action="#{tableBeanHabilitacionProducto.borrarHabilitacionProducto(item.imageID)}" />
+    		</p:column>
+                
+                
+                
+                
+                
+                
+            </p:dataTable>
+        </h:form>
+        
+       
+        
+         <br>////////////////////////////////////////////</br>
+        
+        <br>CERTIFICADO</br>
+        
+        
+        
+        
+        <h:form enctype="multipart/form-data">  
+            <p:messages showDetail="true"/> 
+            <p:panelGrid columns="2">
+                
+                <p:outputLabel for="fecha" value="fecha de vencimiento: "/>
+                <p:calendar id="fecha" pattern="yyyy/MM/dd" showOn="button" value="#{certificado.fecha}"/>
+                        
+                
+               
+                
+                <h:outputLabel for="image" value="Adjuntar RNE *" />
+                <p:fileUpload value="#{certificado.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+                
+                
+                <h:selectOneMenu id="DESARROLLO_ID" 
+                                value="#{certificado.DESARROLLO_ID}">
+                            
+                                <f:selectItem id="DESARROLLO_ID4" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+                                
+                            </h:selectOneMenu>
+                
+                
+                
+                <f:facet name="footer">
+                    <p:commandButton value="Submit" ajax="false" 
+                                     actionListener="#{certificado.upload}"/></f:facet>
+            </p:panelGrid>
+            <p:spacer height="20"></p:spacer>
+            <p:dataTable value="#{tableBeanCertificado.allImage}" var="item" paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 60%" >           
+                <f:facet name="header">
+                        <h:outputText value="CERTIFICADO" />
+                    </f:facet>
+                
+       
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="VENCIMIENTO" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageFecha}"/>
+                </p:column>
+                
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Adjunto" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageName}"/>
+                </p:column>
+                
+                 <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="desarrollo id" />
+                    </f:facet>
+                    <h:outputText value="#{item.desarrolloId}"/>
+                </p:column>
+                
+                
+                <p:column>
+                   
+                   <h:outputLink value="downloadFileServletRne">
+                       <f:param name="id" value="#{item.imageID}" />
+                    <h:outputText value="Descargar" />
+                 </h:outputLink>
+   
+                </p:column>
+                
+                
+               <p:column>
+                    <h:commandLink value="eliminar" 
+                                   action="#{tableBeanCertificado.borrarCertificado(item.imageID)}" />
+    		</p:column>
+                
+                
+            </p:dataTable>
+        </h:form>
+       
+        
+        
+        
+         <br />
+        
+        <h:link outcome="index" value="inicio " />
+        <br />
+        
+        
+        
+        
+    </h:body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <title>Reclamos </title>
+    </h:head>
+    <h:body>
+        <h:form enctype="multipart/form-data">  
+            <p:messages showDetail="true"/> 
+            <p:panelGrid columns="2">
+                
+                
+                <h:outputLabel for="NRO_CONFORMIDAD" value="NRO_CONFORMIDAD: *" />
+                <p:inputText id="NRO_CONFORMIDAD" value="#{reclamo.NRO_CONFORMIDAD}"  /> 
+                
+
+                <h:outputLabel for="NOMBRE_CLIENTE" value="NOMBRE_CLIENTE: *" />
+                <p:inputText id="NOMBRE_CLIENTE" value="#{reclamo.NOMBRE_CLIENTE}"  /> 
+                
+                <h:outputLabel for="PRODUCTO_NO_CONFORME" value="PRODUCTO_NO_CONFORME *" />
+                <p:inputText id="PRODUCTO_NO_CONFORME" value="#{reclamo.PRODUCTO_NO_CONFORME}"  /> 
+                
+                <h:outputLabel for="MOTIVO_RECLAMO" value="MOTIVO_RECLAMO *" />
+                <p:inputText id="MOTIVO_RECLAMO" value="#{reclamo.MOTIVO_RECLAMO}"  /> 
+                
+                <h:outputLabel for="SUCURSAL" value="SUCURSAL *" />
+                <p:inputText id="SUCURSAL" value="#{reclamo.SUCURSAL}"  /> 
+                
+                <h:outputLabel for="MEDIO_RECEPCION" value="MEDIO_RECEPCION *" />
+                <p:inputText id="MEDIO_RECEPCION" value="#{reclamo.MEDIO_RECEPCION}"  /> 
+                
+                <h:outputLabel for="NOMBRE_RECEPCIONISTA" value="NOMBRE_RECEPCIONISTA *" />
+                <p:inputText id="NOMBRE_RECEPCIONISTA" value="#{reclamo.NOMBRE_RECEPCIONISTA}"  /> 
+                
+                <h:outputLabel for="MUESTRAS" value="MUESTRAS *" />
+                <p:inputText id="MUESTRAS" value="#{reclamo.MUESTRAS}"  /> 
+                
+                <h:outputLabel for="MEDIDAS" value="MEDIDAS *" />
+                <p:inputText id="MEDIDAS" value="#{reclamo.MEDIDAS}"  /> 
+                
+                
+                <p:outputLabel for="FECHA_RECLAMO" value="FECHA_RECLAMO "/>
+                <p:calendar id="FECHA_RECLAMO" pattern="yyyy/MM/dd" showOn="button" value="#{reclamo.FECHA_RECLAMO}"/>
+                        
+                
+                
+                <h:outputLabel for="PROVEEDOR_ID" value="PROVEEDOR_ID *" />
+                <p:inputText id="PROVEEDOR_ID" value="#{reclamo.PROVEEDOR_ID}"  /> 
+                
+                <h:outputLabel for="NOMBRE_RECEPCION_PROVEEDOR" value="NOMBRE_RECEPCION_PROVEEDOR *" />
+                <p:inputText id="NOMBRE_RECEPCION_PROVEEDOR" value="#{reclamo.NOMBRE_RECEPCION_PROVEEDOR}"  /> 
+                
+                <p:outputLabel for="FECHA_RECEPCION_PROVEEDOR" value="FECHA_RECEPCION_PROVEEDOR "/>
+                <p:calendar id="FECHA_RECEPCION_PROVEEDOR" pattern="yyyy/MM/dd" showOn="button" value="#{reclamo.FECHA_RECEPCION_PROVEEDOR}"/>
+                
+                
+                <h:outputLabel for="CAUSAS" value="CAUSAS *" />
+                <p:inputText id="CAUSAS" value="#{reclamo.CAUSAS}"  /> 
+                
+                
+                <h:outputLabel for="ACCIONES" value="ACCIONES: *" />
+                <p:inputText id="ACCIONES" value="#{reclamo.ACCIONES}"  /> 
+                
+                <h:outputLabel for="RESPONSABLE" value="RESPONSABLE: *" />
+                <p:inputText id="RESPONSABLE" value="#{reclamo.RESPONSABLE}"  /> 
+                
+                
+                
+                <h:outputLabel for="image" value="Adjuntar foto *" />
+                <p:fileUpload value="#{reclamo.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+                
+                
+               
+                
+                
+                <f:facet name="footer">
+                    <p:commandButton value="Submit" ajax="false" 
+                                     actionListener="#{reclamo.upload}"/></f:facet>
+                                     
+                   
+                                                    
+                                     
+                         
+            </p:panelGrid>
+            <p:spacer height="20"></p:spacer>
+            <p:dataTable value="#{tableBeanReclamo.allImage}" var="item" paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 60%" >           
+                <f:facet name="header">
+                        <h:outputText value="RECLAMOS DE PRODUCTOs" />
+                    </f:facet>
+                
+                
+                 <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="PROVEEDOR id:" />
+                    </f:facet>
+                    <h:outputText value="#{item.proveedorId}"/>
+                </p:column>
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="fecha recepcion proveedor" />
+                    </f:facet>
+                    <h:outputText value="#{item.fechaRecepcionProveedor}"/>
+                </p:column>
+                
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Adjunto" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageName}"/>
+                </p:column>
+                
+                <h:inputHidden value="#{item.NRO_CONFORMIDAD}"/>
+                <h:inputHidden value="#{item.NOMBRE_CLIENTE}"/>
+                <h:inputHidden value="#{item.PRODUCTO_NO_CONFORME}"/>          
+                
+                
+                <h:inputHidden value="#{item.MOTIVO_RECLAMO}"/> 
+                
+                <h:inputHidden value="#{item.SUCURSAL}"/> 
+                <h:inputHidden value="#{item.MEDIO_RECEPCION}"/> 
+                <h:inputHidden value="#{item.NOMBRE_RECEPCIONISTA}"/> 
+                <h:inputHidden value="#{item.MUESTRAS}"/> 
+                <h:inputHidden value="#{item.MEDIDAS}"/> 
+                <h:inputHidden value="#{item.FECHA_RECLAMO}"/> 
+                <h:inputHidden value="#{item.NOMBRE_RECEPCION_PROVEEDOR}"/> 
+                <h:inputHidden value="#{item.CAUSAS}"/> 
+                <h:inputHidden value="#{item.ACCIONES}"/>     
+                <h:inputHidden value="#{item.RESPONSABLE}"/>
+                
+                		
+                
+                
+                <p:column>
+                    <h:commandLink value="pdfiar" 
+                                   action="#{reclamoPdfBean.hacerPdf(item.imageid,item.NRO_CONFORMIDAD,item.NOMBRE_CLIENTE,item.PRODUCTO_NO_CONFORME,item.SUCURSAL,item.MEDIO_RECEPCION,item.NOMBRE_RECEPCIONISTA,item.MUESTRAS,item.CAUSAS,item.ACCIONES,item.RESPONSABLE,item.FECHA_RECLAMO,item.NOMBRE_RECEPCION_PROVEEDOR,item.proveedorId,item.fechaRecepcionProveedor,item.MOTIVO_RECLAMO,item.MEDIDAS)}" />
+    		    
+                </p:column>
+                
+                <p:column>
+                    <h:commandLink value="eliminar" 
+                                   action="#{tableBeanReclamo.borrarReclamo(item.imageid)}" />
+    		</p:column>
+                
+                
+            </p:dataTable>
+        </h:form> 
+        
+        <br />
+        
+        <h:link outcome="index" value="inicio " />
+        <br />
+        
+        
+        
+        
+    </h:body>
+</html>

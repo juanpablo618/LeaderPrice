@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <ui:composition>
+
+        <p:dialog id="DesarrolloCreateDlg" widgetVar="DesarrolloCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDesarrolloTitle}">
+            <h:form id="DesarrolloCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{desarrolloController.selected != null}">
+                        <!--<p:outputLabel value="#{bundle.CreateDesarrolloLabel_desarrolloId}" for="desarrolloId" />
+                        <p:inputText id="desarrolloId" value="#{desarrolloController.selected.desarrolloId}" title="#{bundle.CreateDesarrolloTitle_desarrolloId}" required="false" requiredMessage="#{bundle.CreateDesarrolloRequiredMessage_desarrolloId}"/>
+                        -->
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreateDesarrolloLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{desarrolloController.selected.fecha}" title="#{bundle.EditDesarrolloTitle_fecha}" required="true" requiredMessage="#{bundle.EditDesarrolloRequiredMessage_fecha}" showOn="button"/>
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreateDesarrolloLabel_tipoProyecto}" for="tipoProyecto" />
+                        <!--<p:inputText id="tipoProyecto" value="#{desarrolloController.selected.tipoProyecto}" title="#{bundle.CreateDesarrolloTitle_tipoProyecto}" required="true" requiredMessage="#{bundle.CreateDesarrolloRequiredMessage_tipoProyecto}"/>
+                        -->
+                        <h:selectOneMenu id="tipoProyecto" 
+                                value="#{desarrolloController.selected.tipoProyecto}" title="#{bundle.CreateDesarrolloTitle_tipoProyecto}" required="true" requiredMessage="#{bundle.CreateDesarrolloRequiredMessage_tipoProyecto}">
+                            
+                                <f:selectItem id="item1" itemLabel="nuevo pruducto" itemValue="nuevo pruducto" />
+                                <f:selectItem id="item2" itemLabel="Cambio de producto" itemValue="Cambio de producto" />
+                                <f:selectItem id="item3" itemLabel="Duplicación de producto" itemValue="Duplicación de producto" />
+                            </h:selectOneMenu>
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreateDesarrolloLabel_codigoComercial}" for="codigoComercial" />
+                        <p:inputText  id="codigoComercial" value="#{desarrolloController.selected.codigoComercial}" title="#{bundle.CreateDesarrolloTitle_codigoComercial}" required="true" requiredMessage="#{bundle.CreateDesarrolloRequiredMessage_codigoComercial}"/>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreateDesarrolloLabel_ubicacionFisica}" for="ubicacionFisica" />
+                        <p:inputText id="ubicacionFisica" value="#{desarrolloController.selected.ubicacionFisica}" title="#{bundle.CreateDesarrolloTitle_ubicacionFisica}" required="true" requiredMessage="#{bundle.CreateDesarrolloRequiredMessage_ubicacionFisica}"/>
+                        
+                        
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreateDesarrolloLabel_codigoDesarrollo}" for="codigoDesarrollo" />
+                        
+                        <p:inputText id="codigoDesarrollo"  value="#{desarrolloController.selected.codigoDesarrollo}" title="#{bundle.CreateDesarrolloTitle_codigoDesarrollo}" />
+                        
+                        
+                        
+                        
+                        
+                        
+                           
+                        <p:outputLabel value="#{bundle.CreateDesarrolloLabel_proveedorId}" for="proveedorId" />
+                        <p:selectOneMenu id="proveedorId" value="#{desarrolloController.selected.proveedorId}" >
+                            <f:selectItems value="#{proveedorController.itemsAvailableSelectOne}"
+                                           var="proveedorIdItem"
+                                           itemValue="#{proveedorIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDesarrolloLabel_productoId}" for="productoId" />
+                        <p:selectOneMenu id="productoId" value="#{desarrolloController.selected.productoId}" required="true" requiredMessage="#{bundle.EditDesarrolloRequiredMessage_productoId}">
+                            <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
+                                           var="productoIdItem"
+                                           itemValue="#{productoIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{desarrolloController.create}" value="#{bundle.Save}" update="display,:DesarrolloListForm:datalist,:growl" oncomplete="handleSubmit(args,'DesarrolloCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DesarrolloCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+            
+            
+                          
+                        <h:form>
+                            <h:outputText value="Para generar su codigo de Desarrollo" />
+                            <h:selectOneMenu id="nombre" 
+                                            value="#{listenerView.text2}">
+                                  <p:ajax event="blur" update="out2" />       
+
+                                            <f:selectItem id="item2" itemLabel="nuevo pruducto" itemValue="NP" />
+                                            <f:selectItem id="item3" itemLabel="Cambio de producto" itemValue="CP" />
+                                            <f:selectItem id="item4" itemLabel="Duplicación de producto" itemValue="DP" />
+
+                            </h:selectOneMenu>
+
+
+                            <h:inputText id="out2" value="#{listenerView.text2}" /> 
+
+                        </h:form>      
+
+            
+            
+            
+            
+            
+        </p:dialog>
+
+    </ui:composition>
+</html>

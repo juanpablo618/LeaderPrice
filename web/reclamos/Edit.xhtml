@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReclamosEditDlg" widgetVar="ReclamosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditReclamosTitle}">
+            <h:form id="ReclamosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reclamosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_reclamosId}" for="reclamosId" />
+                        <p:inputText id="reclamosId" value="#{reclamosController.selected.reclamosId}" title="#{bundle.EditReclamosTitle_reclamosId}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_reclamosId}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_nroConformidad}" for="nroConformidad" />
+                        <p:inputText id="nroConformidad" value="#{reclamosController.selected.nroConformidad}" title="#{bundle.EditReclamosTitle_nroConformidad}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_nroConformidad}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_nombreCliente}" for="nombreCliente" />
+                        <p:inputText id="nombreCliente" value="#{reclamosController.selected.nombreCliente}" title="#{bundle.EditReclamosTitle_nombreCliente}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_nombreCliente}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_motivoReclamo}" for="motivoReclamo" />
+                        <p:inputText id="motivoReclamo" value="#{reclamosController.selected.motivoReclamo}" title="#{bundle.EditReclamosTitle_motivoReclamo}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_motivoReclamo}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_sucursal}" for="sucursal" />
+                        <p:inputText id="sucursal" value="#{reclamosController.selected.sucursal}" title="#{bundle.EditReclamosTitle_sucursal}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_sucursal}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_medioRecepcion}" for="medioRecepcion" />
+                        <p:inputText id="medioRecepcion" value="#{reclamosController.selected.medioRecepcion}" title="#{bundle.EditReclamosTitle_medioRecepcion}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_medioRecepcion}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_nombreRecepcionista}" for="nombreRecepcionista" />
+                        <p:inputText id="nombreRecepcionista" value="#{reclamosController.selected.nombreRecepcionista}" title="#{bundle.EditReclamosTitle_nombreRecepcionista}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_nombreRecepcionista}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_muestras}" for="muestras" />
+                        <p:selectBooleanCheckbox id="muestras" value="#{reclamosController.selected.muestras}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_muestras}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_medidas}" for="medidas" />
+                        <p:inputText id="medidas" value="#{reclamosController.selected.medidas}" title="#{bundle.EditReclamosTitle_medidas}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_medidas}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_fechaReclamo}" for="fechaReclamo" />
+                        <p:calendar id="fechaReclamo" pattern="MM/dd/yyyy" value="#{reclamosController.selected.fechaReclamo}" title="#{bundle.EditReclamosTitle_fechaReclamo}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_fechaReclamo}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_imageFotoreclamoName}" for="imageFotoreclamoName" />
+                        <p:inputText id="imageFotoreclamoName" value="#{reclamosController.selected.imageFotoreclamoName}" title="#{bundle.EditReclamosTitle_imageFotoreclamoName}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_imageFotoreclamoName}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_imageFotoreclamo}" for="imageFotoreclamo" />
+                        <p:inputTextarea rows="4" cols="30" id="imageFotoreclamo" value="#{reclamosController.selected.imageFotoreclamo}" title="#{bundle.EditReclamosTitle_imageFotoreclamo}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_imageFotoreclamo}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_proveedorId}" for="proveedorId" />
+                        <p:inputText id="proveedorId" value="#{reclamosController.selected.proveedorId}" title="#{bundle.EditReclamosTitle_proveedorId}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_proveedorId}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_nombreRecepcionProveedor}" for="nombreRecepcionProveedor" />
+                        <p:inputText id="nombreRecepcionProveedor" value="#{reclamosController.selected.nombreRecepcionProveedor}" title="#{bundle.EditReclamosTitle_nombreRecepcionProveedor}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_nombreRecepcionProveedor}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_fechaRecepcionProveedor}" for="fechaRecepcionProveedor" />
+                        <p:calendar id="fechaRecepcionProveedor" pattern="MM/dd/yyyy" value="#{reclamosController.selected.fechaRecepcionProveedor}" title="#{bundle.EditReclamosTitle_fechaRecepcionProveedor}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_fechaRecepcionProveedor}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_causas}" for="causas" />
+                        <p:inputText id="causas" value="#{reclamosController.selected.causas}" title="#{bundle.EditReclamosTitle_causas}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_causas}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_acciones}" for="acciones" />
+                        <p:inputText id="acciones" value="#{reclamosController.selected.acciones}" title="#{bundle.EditReclamosTitle_acciones}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_acciones}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_responsable}" for="responsable" />
+                        <p:inputText id="responsable" value="#{reclamosController.selected.responsable}" title="#{bundle.EditReclamosTitle_responsable}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_responsable}"/>
+                        <p:outputLabel value="#{bundle.EditReclamosLabel_productoNoConforme}" for="productoNoConforme" />
+                        <p:selectOneMenu id="productoNoConforme" value="#{reclamosController.selected.productoNoConforme}" required="true" requiredMessage="#{bundle.EditReclamosRequiredMessage_productoNoConforme}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
+                                           var="productoNoConformeItem"
+                                           itemValue="#{productoNoConformeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reclamosController.update}" value="#{bundle.Save}" update="display,:ReclamosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ReclamosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReclamosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

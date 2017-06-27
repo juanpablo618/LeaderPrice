@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DatosLegalesViewDlg" widgetVar="DatosLegalesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDatosLegalesTitle}">
+            <h:form id="DatosLegalesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{datosLegalesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDatosLegalesLabel_datosLegalesId}"/>
+                        <h:outputText value="#{datosLegalesController.selected.datosLegalesId}" title="#{bundle.ViewDatosLegalesTitle_datosLegalesId}"/>
+                        <h:outputText value="#{bundle.ViewDatosLegalesLabel_desarrolloId}"/>
+                        <h:outputText value="#{datosLegalesController.selected.desarrolloId}" title="#{bundle.ViewDatosLegalesTitle_desarrolloId}"/>
+                        <h:outputText value="#{bundle.ViewDatosLegalesLabel_fecha}"/>
+                        <h:outputText value="#{datosLegalesController.selected.fecha}" title="#{bundle.ViewDatosLegalesTitle_fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDatosLegalesLabel_vencimiento}"/>
+                        <h:outputText value="#{datosLegalesController.selected.vencimiento}" title="#{bundle.ViewDatosLegalesTitle_vencimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDatosLegalesLabel_fileDatolegalName}"/>
+                        <h:outputText value="#{datosLegalesController.selected.fileDatolegalName}" title="#{bundle.ViewDatosLegalesTitle_fileDatolegalName}"/>
+                        <h:outputText value="#{bundle.ViewDatosLegalesLabel_fileDatoslegal}"/>
+                        <h:outputText value="#{datosLegalesController.selected.fileDatoslegal}" title="#{bundle.ViewDatosLegalesTitle_fileDatoslegal}"/>
+                        <h:outputText value="#{bundle.ViewDatosLegalesLabel_tipo}"/>
+                        <h:outputText value="#{datosLegalesController.selected.tipo}" title="#{bundle.ViewDatosLegalesTitle_tipo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DatosLegalesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

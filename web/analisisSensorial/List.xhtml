@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAnalisisSensorialTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            hola
+            <h:form enctype="multipart/form-data"> 
+                <p:messages showDetail="true"/> 
+                <p:panelGrid columns="2">
+
+                    <p:outputLabel for="fecha" value="fecha: "/>
+                    <p:calendar id="fecha" pattern="yyyy/MM/dd" showOn="button" value="#{uploadImage.fecha}"/>
+
+
+                   <!-- <h:outputLabel for="nombre" value="Tipo de analisis: *" />
+                    <p:inputText id="nombre" value="#{uploadImage.nombre}"  /> 
+                    -->
+
+                    <h:selectOneMenu id="nombre" 
+                                    value="#{uploadImage.nombre}">
+
+                                    <f:selectItem id="item1" itemLabel="nuevo pruducto" itemValue="nuevo pruducto" />
+                                    <f:selectItem id="item2" itemLabel="Cambio de producto" itemValue="Cambio de producto" />
+                                    <f:selectItem id="item3" itemLabel="Duplicación de producto" itemValue="Duplicación de producto" />
+                                </h:selectOneMenu>
+
+
+
+
+
+                    <h:outputLabel for="resultado" value="resultado: *" />
+                    <p:inputText id="resultado" value="#{uploadImage.resultado}"  /> 
+
+
+
+                    <h:outputLabel for="image" value="Select Image: *" />
+                    <p:fileUpload value="#{uploadImage.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+
+
+                    <h:selectOneMenu id="DESARROLLO_ID" 
+                                    value="#{uploadImage.DESARROLLO_ID}">
+
+                                    <f:selectItem id="DESARROLLO_ID2" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+
+                                </h:selectOneMenu>
+
+
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Submit" ajax="false" 
+                                         actionListener="#{uploadImage.upload}"/></f:facet>
+                </p:panelGrid>
+            </h:form>
+            
+            hola
+            <h:form id="AnalisisSensorialListForm">
+                <p:panel header="#{bundle.ListAnalisisSensorialTitle}">
+                    <p:dataTable id="datalist" value="#{analisisSensorialController.items}" var="item"
+                                 selectionMode="single" selection="#{analisisSensorialController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.analisisSensorialId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAnalisisSensorialTitle_analisisSensorialId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.analisisSensorialId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAnalisisSensorialTitle_resultado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.resultado}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAnalisisSensorialTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAnalisisSensorialTitle_tipoAnalisis}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoAnalisis}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAnalisisSensorialTitle_fileAnalisissensorialName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fileAnalisissensorialName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAnalisisSensorialTitle_fileAnalisissensorial}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fileAnalisissensorial}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{analisisSensorialController.prepareCreate}" update=":AnalisisSensorialCreateForm" oncomplete="PF('AnalisisSensorialCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AnalisisSensorialViewForm" oncomplete="PF('AnalisisSensorialViewDialog').show()" disabled="#{empty analisisSensorialController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AnalisisSensorialEditForm" oncomplete="PF('AnalisisSensorialEditDialog').show()" disabled="#{empty analisisSensorialController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{analisisSensorialController.destroy}" update=":growl,datalist" disabled="#{empty analisisSensorialController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

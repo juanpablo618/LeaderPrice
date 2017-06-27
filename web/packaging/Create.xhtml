@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PackagingCreateDlg" widgetVar="PackagingCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePackagingTitle}">
+            <h:form id="PackagingCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{packagingController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePackagingLabel_packagingId}" for="packagingId" />
+                        <p:inputText id="packagingId" value="#{packagingController.selected.packagingId}" title="#{bundle.CreatePackagingTitle_packagingId}" required="true" requiredMessage="#{bundle.CreatePackagingRequiredMessage_packagingId}"/>
+                        <p:outputLabel value="#{bundle.CreatePackagingLabel_mkt}" for="mkt" />
+                        <p:selectBooleanCheckbox id="mkt" value="#{packagingController.selected.mkt}" />
+                        <p:outputLabel value="#{bundle.CreatePackagingLabel_proveedor}" for="proveedor" />
+                        <p:selectBooleanCheckbox id="proveedor" value="#{packagingController.selected.proveedor}" />
+                        <p:outputLabel value="#{bundle.CreatePackagingLabel_calidad}" for="calidad" />
+                        <p:selectBooleanCheckbox id="calidad" value="#{packagingController.selected.calidad}" />
+                        <p:outputLabel value="#{bundle.CreatePackagingLabel_filePlanomecanicoName}" for="filePlanomecanicoName" />
+                        <p:inputText id="filePlanomecanicoName" value="#{packagingController.selected.filePlanomecanicoName}" title="#{bundle.CreatePackagingTitle_filePlanomecanicoName}" />
+                        <p:outputLabel value="#{bundle.CreatePackagingLabel_filePlanomecanico}" for="filePlanomecanico" />
+                        <p:inputTextarea rows="4" cols="30" id="filePlanomecanico" value="#{packagingController.selected.filePlanomecanico}" title="#{bundle.CreatePackagingTitle_filePlanomecanico}" />
+                        <p:outputLabel value="#{bundle.CreatePackagingLabel_fileArteName}" for="fileArteName" />
+                        <p:inputText id="fileArteName" value="#{packagingController.selected.fileArteName}" title="#{bundle.CreatePackagingTitle_fileArteName}" />
+                        <p:outputLabel value="#{bundle.CreatePackagingLabel_fileArte}" for="fileArte" />
+                        <p:inputTextarea rows="4" cols="30" id="fileArte" value="#{packagingController.selected.fileArte}" title="#{bundle.CreatePackagingTitle_fileArte}" />
+                        <p:outputLabel value="#{bundle.CreatePackagingLabel_imageFotoName}" for="imageFotoName" />
+                        <p:inputText id="imageFotoName" value="#{packagingController.selected.imageFotoName}" title="#{bundle.CreatePackagingTitle_imageFotoName}" />
+                        <p:outputLabel value="#{bundle.CreatePackagingLabel_imageFoto}" for="imageFoto" />
+                        <p:inputTextarea rows="4" cols="30" id="imageFoto" value="#{packagingController.selected.imageFoto}" title="#{bundle.CreatePackagingTitle_imageFoto}" />
+                        <p:outputLabel value="#{bundle.CreatePackagingLabel_desarrolloId}" for="desarrolloId" />
+                        <p:inputText id="desarrolloId" value="#{packagingController.selected.desarrolloId}" title="#{bundle.CreatePackagingTitle_desarrolloId}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{packagingController.create}" value="#{bundle.Save}" update="display,:PackagingListForm:datalist,:growl" oncomplete="handleSubmit(args,'PackagingCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PackagingCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

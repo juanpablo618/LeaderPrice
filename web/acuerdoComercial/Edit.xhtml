@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AcuerdoComercialEditDlg" widgetVar="AcuerdoComercialEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAcuerdoComercialTitle}">
+            <h:form id="AcuerdoComercialEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{acuerdoComercialController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAcuerdoComercialLabel_acuerdoComercialId}" for="acuerdoComercialId" />
+                        <p:inputText id="acuerdoComercialId" value="#{acuerdoComercialController.selected.acuerdoComercialId}" title="#{bundle.EditAcuerdoComercialTitle_acuerdoComercialId}" required="true" requiredMessage="#{bundle.EditAcuerdoComercialRequiredMessage_acuerdoComercialId}"/>
+                        <p:outputLabel value="#{bundle.EditAcuerdoComercialLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{acuerdoComercialController.selected.fecha}" title="#{bundle.EditAcuerdoComercialTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditAcuerdoComercialLabel_fileAcuerdoName}" for="fileAcuerdoName" />
+                        <p:inputText id="fileAcuerdoName" value="#{acuerdoComercialController.selected.fileAcuerdoName}" title="#{bundle.EditAcuerdoComercialTitle_fileAcuerdoName}" />
+                        <p:outputLabel value="#{bundle.EditAcuerdoComercialLabel_fileAcuerdo}" for="fileAcuerdo" />
+                        <p:inputTextarea rows="4" cols="30" id="fileAcuerdo" value="#{acuerdoComercialController.selected.fileAcuerdo}" title="#{bundle.EditAcuerdoComercialTitle_fileAcuerdo}" />
+                        <p:outputLabel value="#{bundle.EditAcuerdoComercialLabel_proveedorId}" for="proveedorId" />
+                        <p:selectOneMenu id="proveedorId" value="#{acuerdoComercialController.selected.proveedorId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{proveedorController.itemsAvailableSelectOne}"
+                                           var="proveedorIdItem"
+                                           itemValue="#{proveedorIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{acuerdoComercialController.update}" value="#{bundle.Save}" update="display,:AcuerdoComercialListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcuerdoComercialEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AcuerdoComercialEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

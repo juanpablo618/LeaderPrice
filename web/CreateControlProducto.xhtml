@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition>
+
+        <p:dialog id="ControlProductoCreateDlg" widgetVar="ControlProductoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateControlProductoTitle}">
+
+
+            <h:form id="ControlProductoCreateForm" enctype="multipart/form-data">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <h:outputLabel for="ASPECTO" value="#{bundle.CreateControlProductoLabel_aspecto}" />
+                        <p:inputText id="ASPECTO" value="#{controlProducto.ASPECTO}" required="true" requiredMessage="Indique el aspecto" /> 
+
+                        <h:outputLabel for="UnidadeMedida" value="#{bundle.CreateControlProductoLabel_unidadDeMedida}" />
+                        <p:inputText id="UnidadeMedida" value="#{controlProducto.unidadeMedida}" required="true" requiredMessage="Indique la unidad de medida" /> 
+
+                        <h:outputLabel for="ValorReferencia" value="#{bundle.CreateControlProductoLabel_valorReferencia}" />
+                        <p:inputText id="ValorReferencia" value="#{controlProducto.valorReferencia}" required="true" requiredMessage="Indique el valor dereferencia" /> 
+
+                        <h:outputLabel for="year" value="#{bundle.CreateControlProductoLabel_year}" />
+                        <p:inputText id="year" value="#{controlProducto.year}"  required="true" requiredMessage="Indique año del control" /> 
+
+                        <h:outputLabel for="valor_year" value="#{bundle.CreateControlProductoLabel_Valor}" />
+                        <p:inputText id="valor_year" value="#{controlProducto.valorYear}" required="true" requiredMessage="Indique el valor para el año" /> 
+
+                        <p>Desarrolo Nro:</p>
+                        <h:selectOneMenu id="DESARROLLO_ID" 
+                                         value="#{controlProducto.DESARROLLO_ID}"
+                                         required="true"
+                                         requiredMessage="elegir desarrollo"
+                                         >
+
+                            <f:selectItem id="DESARROLLO_ID22" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+
+                        </h:selectOneMenu>
+
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Save}" ajax="false" actionListener="#{controlProducto.upload}"/>
+                </h:panelGroup>
+            </h:form>
+
+        </p:dialog>
+    </ui:composition>
+</html>

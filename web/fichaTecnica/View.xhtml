@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FichaTecnicaViewDlg" widgetVar="FichaTecnicaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewFichaTecnicaTitle}">
+            <h:form id="FichaTecnicaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{fichaTecnicaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewFichaTecnicaLabel_fichaTecnicaId}"/>
+                        <h:outputText value="#{fichaTecnicaController.selected.fichaTecnicaId}" title="#{bundle.ViewFichaTecnicaTitle_fichaTecnicaId}"/>
+                        <h:outputText value="#{bundle.ViewFichaTecnicaLabel_desarrolloId}"/>
+                        <h:outputText value="#{fichaTecnicaController.selected.desarrolloId}" title="#{bundle.ViewFichaTecnicaTitle_desarrolloId}"/>
+                        <h:outputText value="#{bundle.ViewFichaTecnicaLabel_fileFichaproveedorName}"/>
+                        <h:outputText value="#{fichaTecnicaController.selected.fileFichaproveedorName}" title="#{bundle.ViewFichaTecnicaTitle_fileFichaproveedorName}"/>
+                        <h:outputText value="#{bundle.ViewFichaTecnicaLabel_fileFichaproveedor}"/>
+                        <h:outputText value="#{fichaTecnicaController.selected.fileFichaproveedor}" title="#{bundle.ViewFichaTecnicaTitle_fileFichaproveedor}"/>
+                        <h:outputText value="#{bundle.ViewFichaTecnicaLabel_fileFichalibertadName}"/>
+                        <h:outputText value="#{fichaTecnicaController.selected.fileFichalibertadName}" title="#{bundle.ViewFichaTecnicaTitle_fileFichalibertadName}"/>
+                        <h:outputText value="#{bundle.ViewFichaTecnicaLabel_fileFichalibertad}"/>
+                        <h:outputText value="#{fichaTecnicaController.selected.fileFichalibertad}" title="#{bundle.ViewFichaTecnicaTitle_fileFichalibertad}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="FichaTecnicaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

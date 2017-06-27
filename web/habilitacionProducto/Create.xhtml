@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HabilitacionProductoCreateDlg" widgetVar="HabilitacionProductoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateHabilitacionProductoTitle}">
+            <h:form id="HabilitacionProductoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{habilitacionProductoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateHabilitacionProductoLabel_habilitacionProductoId}" for="habilitacionProductoId" />
+                        <p:inputText id="habilitacionProductoId" value="#{habilitacionProductoController.selected.habilitacionProductoId}" title="#{bundle.CreateHabilitacionProductoTitle_habilitacionProductoId}" required="true" requiredMessage="#{bundle.CreateHabilitacionProductoRequiredMessage_habilitacionProductoId}"/>
+                        <p:outputLabel value="#{bundle.CreateHabilitacionProductoLabel_fileHabilitacionProductoName}" for="fileHabilitacionProductoName" />
+                        <p:inputText id="fileHabilitacionProductoName" value="#{habilitacionProductoController.selected.fileHabilitacionProductoName}" title="#{bundle.CreateHabilitacionProductoTitle_fileHabilitacionProductoName}" required="true" requiredMessage="#{bundle.CreateHabilitacionProductoRequiredMessage_fileHabilitacionProductoName}"/>
+                        <p:outputLabel value="#{bundle.CreateHabilitacionProductoLabel_fileHabilitacionProducto}" for="fileHabilitacionProducto" />
+                        <p:inputTextarea rows="4" cols="30" id="fileHabilitacionProducto" value="#{habilitacionProductoController.selected.fileHabilitacionProducto}" title="#{bundle.CreateHabilitacionProductoTitle_fileHabilitacionProducto}" required="true" requiredMessage="#{bundle.CreateHabilitacionProductoRequiredMessage_fileHabilitacionProducto}"/>
+                        <p:outputLabel value="#{bundle.CreateHabilitacionProductoLabel_datosLegalesId}" for="datosLegalesId" />
+                        <p:selectOneMenu id="datosLegalesId" value="#{habilitacionProductoController.selected.datosLegalesId}" required="true" requiredMessage="#{bundle.EditHabilitacionProductoRequiredMessage_datosLegalesId}">
+                            <f:selectItems value="#{datosLegalesController.itemsAvailableSelectOne}"
+                                           var="datosLegalesIdItem"
+                                           itemValue="#{datosLegalesIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{habilitacionProductoController.create}" value="#{bundle.Save}" update="display,:HabilitacionProductoListForm:datalist,:growl" oncomplete="handleSubmit(args,'HabilitacionProductoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="HabilitacionProductoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

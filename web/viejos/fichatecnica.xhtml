@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <title>FICHAS técnicas</title>
+    </h:head>
+    <h:body>
+         <br>FICHAS TÉCNICAS DE PRODUCTO </br>
+        
+        <h:form enctype="multipart/form-data">  
+            <p:messages showDetail="true"/> 
+            <p:panelGrid columns="2">
+                
+               
+               
+                 
+                <h:outputLabel for="image" value="Ficha Proveedor: *" />
+                <p:fileUpload value="#{fichaTecnica.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+                
+                <h:selectOneMenu id="DESARROLLO_ID" 
+                                value="#{fichaTecnica.DESARROLLO_ID}">
+                            
+                                <f:selectItem id="DESARROLLO_ID32" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+                                
+                            </h:selectOneMenu>
+                
+                
+                <f:facet name="footer">
+                    <p:commandButton value="Submit" ajax="false" 
+                                     actionListener="#{fichaTecnica.upload}"/></f:facet>
+            </p:panelGrid>
+            
+            
+            
+            
+            <p:spacer height="20"></p:spacer>
+            <p:dataTable value="#{tableBeanFichaTecnica.allImage}" var="item" paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 60%" >           
+                <f:facet name="header">
+                        <h:outputText value="Proveedor" />
+                    </f:facet>
+                
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Proveedor" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageName}"/>
+                </p:column>
+                
+                  
+                <p:column>
+                   
+                 <h:outputLink value="downloadFileServletFichaTecnicaProveedor">
+                       <f:param name="id" value="#{item.imageID}" />
+                       <h:outputText value="Descargar" />
+                 </h:outputLink>
+   
+                </p:column>
+                
+                <p:column>
+                    <h:commandLink value="eliminar" 
+                                   action="#{tableBeanFichaTecnica.borrarFichaTecnica(item.imageID)}" />
+    		</p:column>
+                
+                                
+                
+            </p:dataTable>
+        </h:form> 
+        
+        <br />
+        <br />
+        <br />
+        
+        <h:form enctype="multipart/form-data">  
+            <p:messages showDetail="true"/> 
+            <p:panelGrid columns="2">
+                
+               <h:outputLabel for="image" value="Ficha Leader Price: *" />
+                <p:fileUpload value="#{fichaTecnicaLeader.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+                
+                
+                
+                <h:selectOneMenu id="DESARROLLO_ID" 
+                                value="#{fichaTecnicaLeader.DESARROLLO_ID}">
+                            
+                                <f:selectItem id="DESARROLLO_ID2" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+                                
+                            </h:selectOneMenu>
+                
+                
+                
+                
+                
+                <f:facet name="footer">
+                    <p:commandButton value="Submit" ajax="false" 
+                                     actionListener="#{fichaTecnicaLeader.upload}"/></f:facet>
+            </p:panelGrid>
+            
+            
+            
+            
+            <p:spacer height="20"></p:spacer>
+            <p:dataTable value="#{tableBeanFichaTecnicaLeader.allImage}" var="item" paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 60%" >           
+                <f:facet name="header">
+                        <h:outputText value="Marca Propia" />
+                    </f:facet>
+                
+              
+                                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Marca Propia" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageName}"/>
+                </p:column>
+                
+                <p:column>
+                   
+                 <h:outputLink value="downloadFileServletFichaTecnicaLeader">
+                       <f:param name="id" value="#{item.imageID}" />
+                       <h:outputText value="Descargar" />
+                 </h:outputLink>
+   
+                </p:column>
+                                
+                <p:column>
+                    <h:commandLink value="eliminar" 
+                                   action="#{tableBeanFichaTecnicaLeader.borrarFichaTecnicaLeader(item.imageID)}" />
+    		</p:column>
+                
+                
+                
+                
+            </p:dataTable>
+        </h:form> 
+        
+        
+        
+        <br />
+        
+        <h:link outcome="index" value="inicio " />
+        <br />
+        
+        
+        
+        
+    </h:body>
+</html>

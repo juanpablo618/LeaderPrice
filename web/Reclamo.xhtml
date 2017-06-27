@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Reclamos"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form enctype="multipart/form-data">  
+                <p:messages showDetail="true"/> 
+
+                <p:dataTable id="datalist" value="#{tableBeanReclamo.allImage}" var="item" paginator="true" rows="5"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,20" widgetVar="50" 
+                             rendered="true"
+                             emptyMessage="No existen Reclamos"
+                             > 
+
+
+                    <f:facet name="header">
+                        <h:outputText value="RECLAMOS DE PRODUCTOS" />
+                    </f:facet>
+
+                    <p:column >
+                        <f:facet name="header">
+                            <h:outputText value="Proveedor" />
+                        </f:facet>
+                        <h:outputText value="#{proveedorController.getProveedorRAZONSOCIAL(item.proveedorId).toString()}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Producto" />
+                        </f:facet>
+                        <h:outputText value="#{productoController.getProducto(item.PRODUCTO_NO_CONFORME).toString()}"/>
+                    </p:column>
+
+                    <p:column>
+
+                        <f:facet name="header">
+                            <h:outputText value="Imagen" />
+                        </f:facet>
+                        <h:outputLink value="DisplayImage?Image_id=#{item.imageID}" target="_blank" >
+                            <h:graphicImage value="DisplayImage?Image_id=#{item.imageID}" width="50" height="50"></h:graphicImage>
+                        </h:outputLink>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Adjunto" />
+                        </f:facet>
+                        <h:outputText value="#{item.imageName}"/>
+                    </p:column>
+
+                    <h:inputHidden value="#{item.NRO_CONFORMIDAD}"/>
+                    <h:inputHidden value="#{item.NOMBRE_CLIENTE}"/>
+                    <h:inputHidden value="#{item.PRODUCTO_NO_CONFORME}"/>          
+                    <h:inputHidden value="#{item.MOTIVO_RECLAMO}"/> 
+                    <h:inputHidden value="#{item.SUCURSAL}"/> 
+                    <h:inputHidden value="#{item.MEDIO_RECEPCION}"/> 
+                    <h:inputHidden value="#{item.NOMBRE_RECEPCIONISTA}"/> 
+                    <h:inputHidden value="#{item.MUESTRAS}"/> 
+                    <h:inputHidden value="#{item.MEDIDAS}"/> 
+                    <h:inputHidden value="#{item.FECHA_RECLAMO}"/> 
+                    <h:inputHidden value="#{item.NOMBRE_RECEPCION_PROVEEDOR}"/> 
+                    <h:inputHidden value="#{item.CAUSAS}"/> 
+                    <h:inputHidden value="#{item.ACCIONES}"/>     
+                    <h:inputHidden value="#{item.RESPONSABLE}"/>
+
+                    <p:column width="25">
+                        <h:commandLink 
+                            action="#{reclamoPdfBean.hacerPdf(item.imageID,item.NRO_CONFORMIDAD,item.NOMBRE_CLIENTE,productoController.getProducto(item.PRODUCTO_NO_CONFORME).toString(),item.SUCURSAL,item.MEDIO_RECEPCION,item.NOMBRE_RECEPCIONISTA,item.MUESTRAS,item.CAUSAS,item.ACCIONES,item.RESPONSABLE,item.FECHA_RECLAMO,item.NOMBRE_RECEPCION_PROVEEDOR,proveedorController.getProveedorRAZONSOCIAL(item.proveedorId).toString(),item.fechaRecepcionProveedor,item.MOTIVO_RECLAMO,item.MEDIDAS)}" 
+                            ><img src="images/pdf-icon.png"  title="Descargar como PDF" align="left"></img>
+                        </h:commandLink>
+                    </p:column>>    
+                    <p:column width="25">
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash" actionListener="#{tableBeanReclamo.borrarReclamo(item.imageID)}" update=":growl,datalist">
+                            <p:confirm header="Confirmación" message="Esta seguro de Eliminar?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="SI" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>       
+
+                    </p:column>>    
+                    <p:column width="25">    
+                        <p:commandButton id="verReclamoButton" icon="ui-icon-search"   actionListener="#{reclamoController.VERPdf(item.imageID,item.NRO_CONFORMIDAD,item.NOMBRE_CLIENTE,item.PRODUCTO_NO_CONFORME,item.SUCURSAL,item.MEDIO_RECEPCION,item.NOMBRE_RECEPCIONISTA,item.MUESTRAS,item.CAUSAS,item.ACCIONES,item.RESPONSABLE,item.FECHA_RECLAMO,item.NOMBRE_RECEPCION_PROVEEDOR,item.proveedorId,item.fechaRecepcionProveedor,item.MOTIVO_RECLAMO,item.MEDIDAS)}" update=":ReclamoVerForm" oncomplete="PF('ReclamosVERDialog').show()"/>
+
+                    </p:column> 
+
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="Nuevo Reclamo" actionListener="#{reclamosController.prepareCreate}" update=":ReclamosCreateForm" oncomplete="PF('ReclamosCreateDialog').show()"/>
+                    </f:facet>  
+
+                </p:dataTable>
+
+            </h:form>
+            <ui:include src="CreateReclamo.xhtml"/>
+            <ui:include src="VerPdfReclamo.xhtml"/>
+            <ui:include src="reclamos/View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

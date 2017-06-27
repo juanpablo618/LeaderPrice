@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        
+        
+        <p:dialog height="480" id="ReclamosCreateDlg" widgetVar="ReclamosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateReclamosTitle}">
+           
+            <h:panelGroup id="display">
+                
+                    <h:form id="ReclamosCreateForm" enctype="multipart/form-data">
+
+                            <p:panel id="basic" header="" >
+                               
+                               
+                               <h:outputLabel for="NRO_CONFORMIDAD" value="Nº de Conformidad: *" style="font-weight:bold"/>                    
+                               <p:inputText id="NRO_CONFORMIDAD" value="#{reclamo.NRO_CONFORMIDAD}" label="Nro de conformidad debe ser un nro" required="true" requiredMessage="N° de conformidad debe ser numérico" >
+                                   
+                                </p:inputText>
+                                <p:message for="NRO_CONFORMIDAD" />
+                                <h:outputText value="N° de conformidad debe ser numérico" />
+
+                            </p:panel>
+
+                            <p:panel id="A" header="A - Datos del Cliente" >
+                                <h:panelGrid columns="2" >
+                                    <h:outputLabel for="NOMBRE_CLIENTE" value="Nombre y Apellido: *"  style="margin-right: 20px;"/>
+                                    <p:inputText id="NOMBRE_CLIENTE" value="#{reclamo.NOMBRE_CLIENTE}"  /> 
+                                </h:panelGrid>
+                            </p:panel>
+
+                            <p:panel id="B" header="B - Datos del Producto" >
+                                <h:panelGrid columns="2" >
+
+                                    <h:outputLabel for="PRODUCTO_NO_CONFORME" value="Producto No Conforme:*" />
+                                    <p:selectOneMenu id="PRODUCTO_NO_CONFORME" style="width: 185px;" value="#{reclamo.PRODUCTO_NO_CONFORME}" >
+                                        <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
+                                                       var="productoIdItem"
+                                                       itemValue="#{productoIdItem.productoId}"/>
+                                    </p:selectOneMenu> 
+
+                                    <h:outputLabel for="MOTIVO_RECLAMO" value="Motivo del Reclamo: *" />
+                                    <p:inputText id="MOTIVO_RECLAMO" value="#{reclamo.MOTIVO_RECLAMO}"  /> 
+
+                                </h:panelGrid>
+                            </p:panel>
+
+                            <p:panel id="C" header="C - Origen del Reclamo" >
+                                <h:panelGrid columns="2" >
+
+                                    <h:outputLabel for="SUCURSAL" value="Sucursal: *" />
+                                    <p:inputText id="SUCURSAL" value="#{reclamo.SUCURSAL}"  /> 
+
+                                    <h:outputLabel for="MEDIO_RECEPCION" value="Medio de Recepción: *" />
+                                    <p:inputText id="MEDIO_RECEPCION" value="#{reclamo.MEDIO_RECEPCION}"  /> 
+
+                                    <h:outputLabel for="NOMBRE_RECEPCIONISTA" value="Recepcionó el Reclamo: *" />
+                                    <p:inputText id="NOMBRE_RECEPCIONISTA" value="#{reclamo.NOMBRE_RECEPCIONISTA}"  /> 
+
+                                    <h:outputLabel for="MUESTRAS" value="Muestras: *" />
+                                    <p:inputText id="MUESTRAS" value="#{reclamo.MUESTRAS}"  /> 
+
+                                </h:panelGrid>
+                            </p:panel>
+
+                            <p:panel id="D" header="D - Medidas Adoptadas por Gestión Leader Price" >
+                                <h:panelGrid columns="2"  id="grid" >
+
+                                    <h:outputLabel for="MEDIDAS" value="Medidas Tomadas: *" style="margin-right: 25px;"/>
+                                    <p:inputText id="MEDIDAS" value="#{reclamo.MEDIDAS}"  /> 
+
+
+                                    <p:outputLabel for="FECHA_RECLAMO" value="Fecha de Reclamo: " style="margin-right: 25px;"/>
+                                    <p:calendar  required="true" label="FECHA_RECLAMO"  id="FECHA_RECLAMO" title="#{bundle.EditDesarrolloTitle_fecha}"  requiredMessage="#{bundle.EditDesarrolloRequiredMessage_fecha}"  pattern="yyyy/MM/dd" showOn="button" value="#{reclamo.FECHA_RECLAMO}"/>
+
+                                    <h:outputLabel for="image" value="Adjuntar Foto: *" />
+                                    <p:fileUpload value="#{reclamo.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/> 
+
+                                </h:panelGrid>
+                            </p:panel>
+
+                            <p:panel id="E" header="E - Investigación de Causas No Conformidad (A completar por Proveedor)" >
+                                <h:panelGrid columns="2" >
+
+                                    <h:outputLabel for="PROVEEDOR_ID" value="Proveedor: *" />
+                                    <p:selectOneMenu id="PROVEEDOR_ID" style="width: 185px;" value="#{reclamo.PROVEEDOR_ID}" >
+                                        <f:selectItems value="#{proveedorController.itemsAvailableSelectOne}"
+                                                       var="proveedorIdItem"
+                                                       itemValue="#{proveedorIdItem.proveedorId}"/>
+                                    </p:selectOneMenu>
+
+                                    <h:outputLabel for="NOMBRE_RECEPCION_PROVEEDOR" value="Recepcionó el Reclamo: *" />
+                                    <p:inputText id="NOMBRE_RECEPCION_PROVEEDOR" value="#{reclamo.NOMBRE_RECEPCION_PROVEEDOR}"  /> 
+
+                                    <p:outputLabel for="FECHA_RECEPCION_PROVEEDOR" value="Fecha Recepción: "/>
+                                    <p:calendar id="FECHA_RECEPCION_PROVEEDOR" pattern="yyyy/MM/dd" showOn="button" value="#{reclamo.FECHA_RECEPCION_PROVEEDOR}"/>
+
+
+                                    <h:outputLabel for="CAUSAS" value="Descrición de Causas:*" />
+                                    <p:inputText id="CAUSAS" value="#{reclamo.CAUSAS}"  /> 
+
+
+                                    <h:outputLabel for="ACCIONES" value="Acciones a Implementar: *" />
+                                    <p:inputText id="ACCIONES" value="#{reclamo.ACCIONES}"  /> 
+
+                                    <h:outputLabel for="RESPONSABLE" value="Responsable: *" />
+                                    <p:inputText id="RESPONSABLE" value="#{reclamo.RESPONSABLE}" required="true"  requiredMessage="Campo Responsable es necesario" /> 
+
+
+                                    </h:panelGrid>
+                                
+                                </p:panel>
+                                <p:commandButton value="#{bundle.Save}" ajax="false" action="#{reclamo.upload}" validateClient="true" />
+
+                </h:form>
+            </h:panelGroup>
+        </p:dialog>
+    </ui:composition>
+</html>

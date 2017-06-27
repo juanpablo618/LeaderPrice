@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CarViewDlg" widgetVar="CarViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCarTitle}">
+            <h:form id="CarViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{carController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCarLabel_carId}"/>
+                        <h:outputText value="#{carController.selected.carId}" title="#{bundle.ViewCarTitle_carId}"/>
+                        <h:outputText value="#{bundle.ViewCarLabel_cname}"/>
+                        <h:outputText value="#{carController.selected.cname}" title="#{bundle.ViewCarTitle_cname}"/>
+                        <h:outputText value="#{bundle.ViewCarLabel_color}"/>
+                        <h:outputText value="#{carController.selected.color}" title="#{bundle.ViewCarTitle_color}"/>
+                        <h:outputText value="#{bundle.ViewCarLabel_speed}"/>
+                        <h:outputText value="#{carController.selected.speed}" title="#{bundle.ViewCarTitle_speed}"/>
+                        <h:outputText value="#{bundle.ViewCarLabel_manufacturedCountry}"/>
+                        <h:outputText value="#{carController.selected.manufacturedCountry}" title="#{bundle.ViewCarTitle_manufacturedCountry}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CarViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

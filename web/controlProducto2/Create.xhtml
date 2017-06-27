@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ControlProducto2CreateDlg" widgetVar="ControlProducto2CreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateControlProducto2Title}">
+            <h:form id="ControlProducto2CreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{controlProducto2Controller.selected != null}">
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreateControlProducto2Label_aspecto}" for="aspecto" />
+                        <p:inputText id="aspecto" value="#{controlProducto2Controller.selected.aspecto}" title="#{bundle.CreateControlProducto2Title_aspecto}" />                       
+                        
+                        <p:outputLabel value="#{bundle.CreateControlProducto2Label_unidadDeMedida}" for="unidadDeMedida" />
+                        <p:inputText id="unidadDeMedida" value="#{controlProducto2Controller.selected.unidadDeMedida}" title="#{bundle.CreateControlProducto2Title_unidadDeMedida}" />
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreateControlProducto2Label_valorDeReferencia}" for="valorDeReferencia" />
+                        <p:inputText id="valorDeReferencia" value="#{controlProducto2Controller.selected.valorDeReferencia}" title="#{bundle.CreateControlProducto2Title_valorDeReferencia}" />
+                        <p:outputLabel value="#{bundle.CreateControlProducto2Label_year}" for="year" />
+                        <p:inputText id="year" value="#{controlProducto2Controller.selected.year}" title="#{bundle.CreateControlProducto2Title_year}" />
+                        <p:outputLabel value="#{bundle.CreateControlProducto2Label_valorYear}" for="valorYear" />
+                        <p:inputText id="valorYear" value="#{controlProducto2Controller.selected.valorYear}" title="#{bundle.CreateControlProducto2Title_valorYear}" />
+                        
+                        
+                       
+                        <h:outputLabel for="DESARROLLO_ID" value="Desarrolo Nro:" />
+                        
+                        <h:selectOneMenu id="DESARROLLO_ID" 
+                                value="#{controlProducto2Controller.selected.desarrolloId}">
+                                <f:selectItem id="desarrolloId" itemLabel="#{elegirDesarrolloBean.desarrollousando}" itemValue="#{elegirDesarrolloBean.desarrollousando}" />
+                        </h:selectOneMenu>
+
+                        <h:outputLabel for="productoId" value="#{bundle.CreateControlProducto2Label_productoId}" />
+                        <h:selectOneMenu id="item73" 
+                                value="#{controlProducto2Controller.selected.productoId}">
+                                <f:selectItem id="item74" itemLabel="#{elegirDesarrolloBean.productousando}" itemValue="#{elegirDesarrolloBean.productousando}" />
+                        </h:selectOneMenu>
+
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{controlProducto2Controller.create}" value="#{bundle.Save}" update="display,:ControlProducto2ListForm:datalist,:growl" oncomplete="handleSubmit(args,'ControlProducto2CreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ControlProducto2CreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

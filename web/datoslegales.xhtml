@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListDatosLegalesTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="DatosLegalesListForm">
+                <p:growl id="growlmsg2" showDetail="true" sticky="true" autoUpdate="true"/>
+                <p:panel header="#{bundle.ListDatosLegalesTitle}">
+                    <p:dataTable id="datalistDatosLegales" value="#{tableBeanRne.filtrado(elegirDesarrolloBean.desarrollousando)}" var="item" paginator="true" rows="5"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="3,5,10" widgetVar="50"
+                                 emptyMessage="No existen RNE  para este desarrollo"
+
+                                 >           
+                        <f:facet name="header">
+                            <h:outputText value="RNE" />
+                        </f:facet>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha"/>
+                            </f:facet>
+                            <h:outputText value="#{item.imageFecha}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Adjunto" />
+                            </f:facet>
+                            <h:outputText value="#{item.imageName}"/>
+                        </p:column>
+                        <p:column width="25">
+                            <h:outputLink value="downloadFileServletRne">
+                                <f:param name="id" value="#{item.imageID}" />
+                                <img src="images/pdf.png"  title="Descargar PDF"></img>
+                            </h:outputLink>
+                        </p:column>
+                        <p:column width="25">
+                            <h:outputLink value="deleteDlegal" >
+                                
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash" actionListener="#{tableBeanRne.borrarRne(item.imageID)}" title="Eliminar" update=":growl,datalistDatosLegales">
+                                <p:confirm header="Confirmación" message="Esta seguro de Eliminar?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                       <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                          <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                          <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>       
+                        
+                            </h:outputLink>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createRne" icon="ui-icon-plus"   value="Nuevo RNE" actionListener="#{datosLegalesController.prepareCreate}" update=":RneCreateForm" oncomplete="PF('RneCreateDialog').show()"/>                      
+                        </f:facet>
+                    </p:dataTable>
+
+                    <p:spacer height="25"></p:spacer>
+                    <p:dataTable id="datalistDatosHP" value="#{tableBeanHabilitacionProducto.filtrado(elegirDesarrolloBean.desarrollousando)}" var="item" paginator="true" rows="5"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="3,5,10" widgetVar="50" 
+                                 emptyMessage="No existen habilitaciones de producto para este desarrollo"
+                                 >           
+                        <f:facet name="header">
+                            <h:outputText value="Habilitación de Producto" />
+                        </f:facet>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Vencimiento" />
+                            </f:facet>
+                            <h:outputText value="#{item.imageFecha}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Adjunto" />
+                            </f:facet>
+                            <h:outputText value="#{item.imageName}"/>
+                        </p:column>
+                        <p:column width="25">
+                            <h:outputLink value="downloadFileServletRne">
+                                <f:param name="id" value="#{item.imageID}" />
+                                <img src="images/pdf.png"  title="Descargar PDF"></img>
+                            </h:outputLink>
+                        </p:column>
+                        <p:column width="25">
+                            <h:outputLink value="deleteHabProd" >
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash" actionListener="#{tableBeanHabilitacionProducto.borrarHabilitacionProducto(item.imageID)}" title="Eliminar" update=":growl,datalistDatosHP">
+                                <p:confirm header="Confirmación" message="Esta seguro de Eliminar?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                       <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                          <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                          <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>       
+                        
+                            </h:outputLink>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createHp" icon="ui-icon-plus"   value="Nueva Habilitación" actionListener="#{habilitacionProductoController.prepareCreate}" update=":HabilitacionProductoCreateForm" oncomplete="PF('HabilitacionProductoCreateDialog').show()"/>
+                        </f:facet>    
+                    </p:dataTable>
+
+                    <p:spacer height="25"></p:spacer>
+                    <p:dataTable id="datalistDatosCertificado" value="#{tableBeanCertificado.filtrado(elegirDesarrolloBean.desarrollousando)}" var="item" paginator="true" rows="5"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,20" widgetVar="50"
+                                 emptyMessage="No existen Certificados para este desarrollo"
+                                 >           
+                        <f:facet name="header">
+                            <h:outputText value="CERTIFICADO" />
+                        </f:facet>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Vencimiento" />
+                            </f:facet>
+                            <h:outputText value="#{item.imageFecha}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Adjunto" />
+                            </f:facet>
+                            <h:outputText value="#{item.imageName}"/>
+                        </p:column> 
+                        <p:column width="25">                   
+                            <h:outputLink value="downloadFileServletRne">
+                                <f:param name="id" value="#{item.imageID}" />
+                                <img src="images/pdf.png"  title="Descargar PDF"></img>
+                            </h:outputLink>
+                        </p:column>
+                        <p:column width="25">
+                            <h:outputLink value="deleteCert" >
+                               
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash" actionListener="#{tableBeanCertificado.borrarCertificado(item.imageID)}" title="Eliminar" update=":growl,datalistDatosCertificado">
+                                <p:confirm header="Confirmación" message="Esta seguro de Eliminar?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                       <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                          <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                          <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>       
+                        
+                            </h:outputLink>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createCert" icon="ui-icon-plus"   value="Nuevo Certificado" actionListener="#{certificadoController.prepareCreate}" update=":CertificadoCreateForm" oncomplete="PF('CertificadoCreateDialog').show()"/>
+                        </f:facet>
+                    </p:dataTable> 
+
+                </p:panel>
+            </h:form>
+
+            <ui:include src="CreateRne.xhtml"/>
+            <ui:include src="CreateHp.xhtml"/>
+            <ui:include src="CreateCert.xhtml"/>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

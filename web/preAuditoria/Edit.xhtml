@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PreAuditoriaEditDlg" widgetVar="PreAuditoriaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPreAuditoriaTitle}">
+            <h:form id="PreAuditoriaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{preAuditoriaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPreAuditoriaLabel_preAuditoriaId}" for="preAuditoriaId" />
+                        <p:inputText id="preAuditoriaId" value="#{preAuditoriaController.selected.preAuditoriaId}" title="#{bundle.EditPreAuditoriaTitle_preAuditoriaId}" required="true" requiredMessage="#{bundle.EditPreAuditoriaRequiredMessage_preAuditoriaId}"/>
+                        <p:outputLabel value="#{bundle.EditPreAuditoriaLabel_desarrolloId}" for="desarrolloId" />
+                        <p:inputText id="desarrolloId" value="#{preAuditoriaController.selected.desarrolloId}" title="#{bundle.EditPreAuditoriaTitle_desarrolloId}" />
+                        <p:outputLabel value="#{bundle.EditPreAuditoriaLabel_filePreauditoriaName}" for="filePreauditoriaName" />
+                        <p:inputText id="filePreauditoriaName" value="#{preAuditoriaController.selected.filePreauditoriaName}" title="#{bundle.EditPreAuditoriaTitle_filePreauditoriaName}" />
+                        <p:outputLabel value="#{bundle.EditPreAuditoriaLabel_filePreauditoria}" for="filePreauditoria" />
+                        <p:inputTextarea rows="4" cols="30" id="filePreauditoria" value="#{preAuditoriaController.selected.filePreauditoria}" title="#{bundle.EditPreAuditoriaTitle_filePreauditoria}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{preAuditoriaController.update}" value="#{bundle.Save}" update="display,:PreAuditoriaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PreAuditoriaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PreAuditoriaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

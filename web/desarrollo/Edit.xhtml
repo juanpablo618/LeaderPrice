@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DesarrolloEditDlg" widgetVar="DesarrolloEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDesarrolloTitle}">
+            <h:form id="DesarrolloEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{desarrolloController.selected != null}">
+                        
+                        <p:outputLabel value="#{bundle.EditDesarrolloLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{desarrolloController.selected.fecha}" title="#{bundle.EditDesarrolloTitle_fecha}" required="true" requiredMessage="#{bundle.EditDesarrolloRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditDesarrolloLabel_tipoProyecto}" for="tipoProyecto" />
+                        <p:selectOneMenu id="tipoProyecto" style="width: 185px;"
+                        value="#{desarrolloController.selected.tipoProyecto}">
+                            
+                                <f:selectItem id="item1" itemLabel="A - Nuevo Producto" itemValue="Nuevo Producto" />
+                                <f:selectItem id="item2" itemLabel="B - Cambio de Producto" itemValue="Cambio de Producto" />
+                                <f:selectItem id="item3" itemLabel="C - Duplicación de Producto" itemValue="Duplicación de Producto" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDesarrolloLabel_proveedorId}" for="proveedorId" />
+                        <p:selectOneMenu id="proveedorId" style="width: 185px;" value="#{desarrolloController.selected.proveedorId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}" noSelectionOption="true"/>
+                            <f:selectItems value="#{proveedorController.itemsAvailableSelectOne}"
+                                           var="proveedorIdItem"
+                                           itemValue="#{proveedorIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDesarrolloLabel_productoId}" for="productoId" />
+                        <p:selectOneMenu id="productoId" style="width: 185px;" value="#{desarrolloController.selected.productoId}" required="true" requiredMessage="#{bundle.EditDesarrolloRequiredMessage_productoId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}" noSelectionOption="true"/>
+                            <f:selectItems value="#{productoController.itemsAvailableSelectOne}"
+                                           var="productoIdItem"
+                                           itemValue="#{productoIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDesarrolloLabel_codigoComercial}" for="codigoComercial" />
+                        <p:inputText style="width: 180px;" id="codigoComercial" value="#{desarrolloController.selected.codigoComercial}" title="#{bundle.EditDesarrolloTitle_codigoComercial}" required="false"/>
+                        <p:outputLabel value="#{bundle.EditDesarrolloLabel_ubicacionFisica}" for="ubicacionFisica" />
+                        <p:inputText style="width: 180px;" id="ubicacionFisica" value="#{desarrolloController.selected.ubicacionFisica}" title="#{bundle.EditDesarrolloTitle_ubicacionFisica}" required="false"/>
+                       
+                        
+                         <p:outputLabel value="#{bundle.EditDesarrolloLabel_codigoDesarrollo}" for="codigoDesarrollo" />
+                         <p:inputText style="width: 180px;" id="codigoDesarrollo" value="#{desarrolloController.selected.codigoDesarrollo}" title="#{bundle.EditDesarrolloTitle_codigoDesarrollo}" required="true" requiredMessage="#{bundle.EditDesarrolloRequiredMessage_codigoDesarrollo}"/>
+                       
+                        
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{desarrolloController.update}" value="#{bundle.Save}" update="display,:DesarrolloListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DesarrolloEditDialog');"/>
+                    
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

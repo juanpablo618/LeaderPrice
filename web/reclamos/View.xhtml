@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReclamosViewDlg" widgetVar="ReclamosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewReclamosTitle}">
+            <h:form id="ReclamosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reclamosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewReclamosLabel_reclamosId}"/>
+                        <h:outputText value="#{reclamosController.selected.reclamosId}" title="#{bundle.ViewReclamosTitle_reclamosId}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_nroConformidad}"/>
+                        <h:outputText value="#{reclamosController.selected.nroConformidad}" title="#{bundle.ViewReclamosTitle_nroConformidad}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_nombreCliente}"/>
+                        <h:outputText value="#{reclamosController.selected.nombreCliente}" title="#{bundle.ViewReclamosTitle_nombreCliente}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_motivoReclamo}"/>
+                        <h:outputText value="#{reclamosController.selected.motivoReclamo}" title="#{bundle.ViewReclamosTitle_motivoReclamo}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_sucursal}"/>
+                        <h:outputText value="#{reclamosController.selected.sucursal}" title="#{bundle.ViewReclamosTitle_sucursal}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_medioRecepcion}"/>
+                        <h:outputText value="#{reclamosController.selected.medioRecepcion}" title="#{bundle.ViewReclamosTitle_medioRecepcion}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_nombreRecepcionista}"/>
+                        <h:outputText value="#{reclamosController.selected.nombreRecepcionista}" title="#{bundle.ViewReclamosTitle_nombreRecepcionista}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_muestras}"/>
+                        <p:selectBooleanCheckbox value="#{reclamosController.selected.muestras}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_medidas}"/>
+                        <h:outputText value="#{reclamosController.selected.medidas}" title="#{bundle.ViewReclamosTitle_medidas}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_fechaReclamo}"/>
+                        <h:outputText value="#{reclamosController.selected.fechaReclamo}" title="#{bundle.ViewReclamosTitle_fechaReclamo}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_imageFotoreclamoName}"/>
+                        <h:outputText value="#{reclamosController.selected.imageFotoreclamoName}" title="#{bundle.ViewReclamosTitle_imageFotoreclamoName}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_imageFotoreclamo}"/>
+                        <h:outputText value="#{reclamosController.selected.imageFotoreclamo}" title="#{bundle.ViewReclamosTitle_imageFotoreclamo}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_proveedorId}"/>
+                        <h:outputText value="#{reclamosController.selected.proveedorId}" title="#{bundle.ViewReclamosTitle_proveedorId}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_nombreRecepcionProveedor}"/>
+                        <h:outputText value="#{reclamosController.selected.nombreRecepcionProveedor}" title="#{bundle.ViewReclamosTitle_nombreRecepcionProveedor}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_fechaRecepcionProveedor}"/>
+                        <h:outputText value="#{reclamosController.selected.fechaRecepcionProveedor}" title="#{bundle.ViewReclamosTitle_fechaRecepcionProveedor}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_causas}"/>
+                        <h:outputText value="#{reclamosController.selected.causas}" title="#{bundle.ViewReclamosTitle_causas}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_acciones}"/>
+                        <h:outputText value="#{reclamosController.selected.acciones}" title="#{bundle.ViewReclamosTitle_acciones}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_responsable}"/>
+                        <h:outputText value="#{reclamosController.selected.responsable}" title="#{bundle.ViewReclamosTitle_responsable}"/>
+                        <h:outputText value="#{bundle.ViewReclamosLabel_productoNoConforme}"/>
+                        <h:outputText value="#{reclamosController.selected.productoNoConforme}" title="#{bundle.ViewReclamosTitle_productoNoConforme}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ReclamosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

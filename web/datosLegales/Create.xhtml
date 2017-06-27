@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DatosLegalesCreateDlg" widgetVar="DatosLegalesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDatosLegalesTitle}">
+            <h:form id="DatosLegalesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{datosLegalesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDatosLegalesLabel_datosLegalesId}" for="datosLegalesId" />
+                        <p:inputText id="datosLegalesId" value="#{datosLegalesController.selected.datosLegalesId}" title="#{bundle.CreateDatosLegalesTitle_datosLegalesId}" required="true" requiredMessage="#{bundle.CreateDatosLegalesRequiredMessage_datosLegalesId}"/>
+                        <p:outputLabel value="#{bundle.CreateDatosLegalesLabel_desarrolloId}" for="desarrolloId" />
+                        <p:inputText id="desarrolloId" value="#{datosLegalesController.selected.desarrolloId}" title="#{bundle.CreateDatosLegalesTitle_desarrolloId}" />
+                        <p:outputLabel value="#{bundle.CreateDatosLegalesLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{datosLegalesController.selected.fecha}" title="#{bundle.EditDatosLegalesTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDatosLegalesLabel_vencimiento}" for="vencimiento" />
+                        <p:calendar id="vencimiento" pattern="MM/dd/yyyy" value="#{datosLegalesController.selected.vencimiento}" title="#{bundle.EditDatosLegalesTitle_vencimiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDatosLegalesLabel_fileDatolegalName}" for="fileDatolegalName" />
+                        <p:inputText id="fileDatolegalName" value="#{datosLegalesController.selected.fileDatolegalName}" title="#{bundle.CreateDatosLegalesTitle_fileDatolegalName}" />
+                        <p:outputLabel value="#{bundle.CreateDatosLegalesLabel_fileDatoslegal}" for="fileDatoslegal" />
+                        <p:inputTextarea rows="4" cols="30" id="fileDatoslegal" value="#{datosLegalesController.selected.fileDatoslegal}" title="#{bundle.CreateDatosLegalesTitle_fileDatoslegal}" />
+                        <p:outputLabel value="#{bundle.CreateDatosLegalesLabel_tipo}" for="tipo" />
+                        <p:inputText id="tipo" value="#{datosLegalesController.selected.tipo}" title="#{bundle.CreateDatosLegalesTitle_tipo}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{datosLegalesController.create}" value="#{bundle.Save}" update="display,:DatosLegalesListForm:datalist,:growl" oncomplete="handleSubmit(args,'DatosLegalesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DatosLegalesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
